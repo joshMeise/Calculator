@@ -1,0 +1,59 @@
+# Vivado generated directories
+.project/
+.sdk/
+.data/
+.hw/
+.hw_handoff/
+.ip_user_files/
+.sim/
+.simulation/
+.tcl/
+.runs/
+.cache/
+.webtalk/
+
+# Vivado specific files
+*.jou
+*.log
+*.str
+*.strx
+*.html
+*.backup.jou
+*.backup.log
+*.xml
+*.bin
+*.checkpoint
+*.pb
+*.wdb
+*.wcfg
+*.drc
+*.dcp
+*.xpr
+
+# FPGA bitstream and programming files
+*.bit
+*.mcs
+*.prm
+*.bin
+*.ltx
+*.sdf
+
+# Include constraint files (e.g., .xdc)
+# Uncomment the following lines if you have specific constraints to ignore
+#*.xdc
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+
+# Operating system files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Tool-specific directories
+.vivado/
+.ip_cache/
+webtalk/
