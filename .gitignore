@@ -57,3 +57,8 @@ Thumbs.db
 .vivado/
 .ip_cache/
 webtalk/
+
+# emacs backup files
+*~
+\#*\#
+.\#*
