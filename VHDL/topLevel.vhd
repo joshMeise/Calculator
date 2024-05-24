@@ -58,7 +58,15 @@ architecture structural of calcualtor is
     port (clk: in std_logic;
           numPort: in signed(15 downto 0);
           newNumPort: in std_logic;
-          ansPort: in std_logic;
+          maxAddrPort: out unsigned(7 downto 0);
+          newRegPort: out std_logic;
+          regPort: out regType);
+  end component;
+
+  component toAnsReg is
+    port (clk: in std_logic;
+          ansPort: in signed(15 downto 0);
+          newAnsPort: in std_logic;
           maxAddrPort: out unsigned(7 downto 0);
           newRegPort: out std_logic;
           regPort: out regType);
@@ -82,11 +90,11 @@ architecture structural of calcualtor is
           TCDonePort: out std_logic);
   end component;
 
-  signal ansSend, ASend, BSend, opSend, AEn, BEn, sumEn, multEn, subEn, resetEn, calcEn, newNum, newNumReg, newOpReg, newReg, TCDone: std_logic := '0';
+  signal ansSend, ASend, BSend, opSend, AEn, BEn, sumEn, multEn, subEn, resetEn, calcEn, newNum, newNumReg, newOpReg, newAnsReg, newReg, TCDone: std_logic := '0';
   signal A, B, ans, num: signed(15 downto 0) := (others => '0');
   signal op: opType := sum;
-  signal numMaxAddr, opMaxAddr, maxAddr: unsigned(7 downto 0) := (others => '0');
-  signal numReg, opReg, reg: regType := (others => (others => '0'));
+  signal numMaxAddr, opMaxAddr, ansMaxAddr, maxAddr: unsigned(7 downto 0) := (others => '0');
+  signal numReg, opReg, ansReg, reg: regType := (others => (others => '0'));
 
 begin
 
@@ -129,7 +137,6 @@ begin
     port map (clk => clk,
               numPort => num,
               newNumPort => newNum,
-              ansPort => ansSend,
               maxAddrPort => numMaxAddr,
               newRegPort => newNumReg,
               regPort => numReg);
@@ -142,6 +149,14 @@ begin
               newRegPort => newOpReg,
               regport => opReg);
 
+    toAns: toAnsReg
+    port map (clk => clk,
+              ansPort => ans,
+              newAnsPort => ansSend,
+              maxAddrPort => ansMaxAddr,
+              newRegPort => newAnsReg,
+              regport => opReg);
+
   transmitter: trans
     port map(clk => clk,
              regPort=> reg,
@@ -150,8 +165,8 @@ begin
              TxPort => TXExtPort,
              TCDonePort => TCDone);
 
-  newNum <= ansSend or ASend or BSend;
-  newReg <= newNumReg or newOpReg;
+  newNum <= ASend or BSend;
+  newReg <= newNumReg or newOpReg or newAnsReg;
   
   updateRegAndAddr: process(newOpReg, newNumReg)
   begin
@@ -161,14 +176,15 @@ begin
     elsif newNumReg = '1' then
       maxAddr <= numMaxAddr;
       reg <= numReg;
-    end if; 
+    elsif newOpReg  = '1' then
+      maxAddr <= ansMaxAddr;
+      reg <= ansReg;
+    end if;
   end process;  
 
   updateNum: process(ansSend, ASend, BSend)
   begin
-    if ansSend = '1' then
-      num <= ans;
-    elsif ASend = '1' then
+    if ASend = '1' then
       num <= A;
     elsif BSend = '1' then
       num <= B;

@@ -11,6 +11,7 @@ entity toNumReg is
 port (clk: in std_logic;
       numPort: in signed(15 downto 0);
       newNumPort: in std_logic;
+      ansPort: in std_logic;
       maxAddrPort: out unsigned(7 downto 0);
       newRegPort: out std_logic;
       regPort: out regType);
@@ -53,10 +54,11 @@ begin
     
     case cs is
       when idle =>
+        ansPortStore <= ansPort;
         if newNumPort = '1' then
           ns <= countDig;
         end if;
-      when countDig =>
+    when countDig =>
         count <= '1';
         ns <= checkNeg;
       when checkNeg =>
@@ -82,7 +84,7 @@ begin
           ns <= conv;
         end if;
       when addSpace =>
-        space <= '1';
+        sapce <= '1';
         ns <= send;
       when send =>
         intNewReg <= '1';
@@ -122,6 +124,12 @@ begin
         end if;    
       end if;
 
+      if equal = '1' then
+        reg(0) <= "00111101";
+        reg(1) <= "00100000";
+        intAddr <= to_unsigned(2, 8);
+      end if;
+      
       if convert = '1' then
         
         if numDig = 5 then
@@ -141,6 +149,9 @@ begin
         end if;
         
         numDig <= numDig - 1;
+
+        -- Write an equal sign into the register.
+        intReg(0) <= 
       end if;
       
       if write = '1' then
@@ -152,6 +163,13 @@ begin
         intReg(to_integer(intAddr)) <= "00100000";
         intAddr <= intAdd + 1;
       end if;
+
+      if newLine = '1' then
+        intReg(to_integer(intAddr)) <= "00001010";
+        intReg(to_integer(intAddr + 1)) <= "00001101";
+        intAddr <= intAddr + 2;
+      end if;
+    
     end if;
   
     writeData <= "0011" & std_logic_vector(dig);
