@@ -7,18 +7,17 @@ library work;
 use work.myPackage.all;
 use work.fixed_pkg.all;
 
-entity toNumReg is
+entity toAnsReg is
 port (clk: in std_logic;
       numPort: in signed(15 downto 0);
       newNumPort: in std_logic;
-      ansPort: in std_logic;
       maxAddrPort: out unsigned(7 downto 0);
       newRegPort: out std_logic;
       regPort: out regType);
-end toNumReg;
+end toAnsReg;
 
-architecture behavioral of toNumReg is
-	type state is (idle, countDig, checkNeg, writeNeg, conv, writeConv, addSpace, send);
+architecture behavioral of toAnsReg is
+	type state is (idle, addEq, countDig, checkNeg, writeNeg, conv, writeConv, addNewline, send);
     
   signal cs, ns: state := idle;
 	signal intAddr: unsigned(7 downto 0) := (others => '0');
@@ -26,7 +25,7 @@ architecture behavioral of toNumReg is
   signal intReg: regType := (others => (others => '0'));
   signal intNewReg: std_logic := '0';
   signal TCconvert: std_logic := '0';
-  signal write, wtNeg, neg, clrReg, count, convert, chNeg, space: std_logic := '0';
+  signal write, wtNeg, neg, clrReg, count, convert, chNeg, equal, newLine: std_logic := '0';
   signal writeData, r1, r0: std_logic_vector(7 downto 0) := (others => '0');
   signal numDig: unsigned(2 downto 0) := (others => '0');
   signal dig: unsigned(3 downto 0) := (others => '0');
@@ -50,14 +49,17 @@ begin
     intNewReg <= '0';
     convert <= '0';
     count <= '0';
-    space <= '0';
+    newLine <= '0';
+    equal <= '0';
     
     case cs is
       when idle =>
-        ansPortStore <= ansPort;
         if newNumPort = '1' then
-          ns <= countDig;
+          ns <= addEq;
         end if;
+      when addEq =>
+        equal <= '1';
+        ns <= countDig;
     when countDig =>
         count <= '1';
         ns <= checkNeg;
@@ -79,12 +81,12 @@ begin
         write <= '1';
         
         if TCconvert = '1' then
-          ns <= addSpace;
+          ns <= addNewLine;
         else
           ns <= conv;
         end if;
-      when addSpace =>
-        sapce <= '1';
+      when addNewLine =>
+        newLine <= '1';
         ns <= send;
       when send =>
         intNewReg <= '1';
@@ -97,6 +99,12 @@ begin
 	datapath: process(clk, numDig, dig)
   begin
     if rising_edge(clk) then
+      if eq = '1' then
+        reg(0) <= "00111101";
+        reg(1) <= "00100000";
+        intAddr <= to_signed(2, 8);
+      end if;
+        
       neg <= '0';
       if chNeg = '1' then
         if numPort < 0 then
@@ -150,8 +158,6 @@ begin
         
         numDig <= numDig - 1;
 
-        -- Write an equal sign into the register.
-        intReg(0) <= 
       end if;
       
       if write = '1' then
@@ -159,17 +165,11 @@ begin
         intAddr <= intAddr + 1;
       end if;
 
-      if space = '1' then
-        intReg(to_integer(intAddr)) <= "00100000";
-        intAddr <= intAdd + 1;
-      end if;
-
       if newLine = '1' then
         intReg(to_integer(intAddr)) <= "00001010";
         intReg(to_integer(intAddr + 1)) <= "00001101";
-        intAddr <= intAddr + 2;
+        intAddr <= intAdd + 2;
       end if;
-    
     end if;
   
     writeData <= "0011" & std_logic_vector(dig);

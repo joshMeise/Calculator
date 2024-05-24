@@ -12,7 +12,7 @@ entity calculator is
         subExtPort: in std_logic;
         loadExtPort: in std_logic;
         resetExtPort: in std_logic;
-        inputPort: in std_logic_vector(15 downto 0);
+        inputExtPort: in std_logic_vector(15 downto 0);
         TxExt: out std_logic);
 end calculator;
         
@@ -100,11 +100,11 @@ begin
 
   controller: fsm
     port map (clk => clk,
-              sumPort => sumPort,              
-              multPort => multPort,
-              subPort => subPort,
-              loadPort => loadPort,
-              resetPort => resetPort;
+              sumPort => sumExtPort,              
+              multPort => multExtPort,
+              subPort => subExtPort,
+              loadPort => loadExtPort,
+              resetPort => resetExtPort;
               TCDonePort => TCDone,
               AEnPort => AEn,
               BEnPort => BEn,
@@ -127,7 +127,7 @@ begin
               multEnPort => multEn,
               resetEnPort => resetEn,
               calcEnPort => calcEn,
-              inputPort => inputPort,
+              inputPort => inputExtPort,
               ansPort => ans,
               APort => A,
               BPort => B,
