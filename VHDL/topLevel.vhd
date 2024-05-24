@@ -13,10 +13,10 @@ entity calculator is
         loadExtPort: in std_logic;
         resetExtPort: in std_logic;
         inputExtPort: in std_logic_vector(15 downto 0);
-        TxExt: out std_logic);
+        TxExtPort: out std_logic);
 end calculator;
         
-architecture structural of calcualtor is
+architecture structural of calculator is
   component fsm is
     port (clk: in std_logic;
           sumPort: in std_logic;
@@ -65,8 +65,8 @@ architecture structural of calcualtor is
 
   component toAnsReg is
     port (clk: in std_logic;
-          ansPort: in signed(15 downto 0);
-          newAnsPort: in std_logic;
+          numPort: in signed(15 downto 0);
+          newNumPort: in std_logic;
           maxAddrPort: out unsigned(7 downto 0);
           newRegPort: out std_logic;
           regPort: out regType);
@@ -104,7 +104,7 @@ begin
               multPort => multExtPort,
               subPort => subExtPort,
               loadPort => loadExtPort,
-              resetPort => resetExtPort;
+              resetPort => resetExtPort,
               TCDonePort => TCDone,
               AEnPort => AEn,
               BEnPort => BEn,
@@ -151,8 +151,8 @@ begin
 
     toAns: toAnsReg
     port map (clk => clk,
-              ansPort => ans,
-              newAnsPort => ansSend,
+              numPort => ans,
+              newNumPort => ansSend,
               maxAddrPort => ansMaxAddr,
               newRegPort => newAnsReg,
               regport => opReg);

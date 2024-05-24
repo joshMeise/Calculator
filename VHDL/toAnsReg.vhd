@@ -99,10 +99,10 @@ begin
 	datapath: process(clk, numDig, dig)
   begin
     if rising_edge(clk) then
-      if eq = '1' then
-        reg(0) <= "00111101";
-        reg(1) <= "00100000";
-        intAddr <= to_signed(2, 8);
+      if equal = '1' then
+        intReg(0) <= "00111101";
+        intReg(1) <= "00100000";
+        intAddr <= to_unsigned(2, 8);
       end if;
         
       neg <= '0';
@@ -119,23 +119,17 @@ begin
       end if;
       
       if count = '1' then
-        if to_integer(num) > 9999 then
+        if to_integer(numPort) > 9999 then
           numDig <= to_unsigned(5, 3);
-        elsif to_integer(num) > 999 and to_integer(num) < 10000 then
+        elsif to_integer(numPort) > 999 and to_integer(numPort) < 10000 then
           numDig <= to_unsigned(4, 3);
-        elsif to_integer(num) > 99 and to_integer(num) < 1000 then
+        elsif to_integer(numPort) > 99 and to_integer(numPort) < 1000 then
           numDig <= to_unsigned(3, 3);
-        elsif ((to_integer(num) > 9) and (to_integer(num) < 100)) then
+        elsif ((to_integer(numPort) > 9) and (to_integer(numPort) < 100)) then
           numDig <= to_unsigned(2, 3);
         else
           numDig <= to_unsigned(1, 3);
         end if;    
-      end if;
-
-      if equal = '1' then
-        reg(0) <= "00111101";
-        reg(1) <= "00100000";
-        intAddr <= to_unsigned(2, 8);
       end if;
       
       if convert = '1' then
@@ -168,7 +162,7 @@ begin
       if newLine = '1' then
         intReg(to_integer(intAddr)) <= "00001010";
         intReg(to_integer(intAddr + 1)) <= "00001101";
-        intAddr <= intAdd + 2;
+        intAddr <= intAddr + 2;
       end if;
     end if;
   

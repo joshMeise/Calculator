@@ -15,13 +15,13 @@ port (clk: in std_logic;
 end toOpReg;
 
 architecture behavioral of toOpReg is
-  type state is (idle, fillReg, sendReg);
+  type state is (idle, fillReg, send);
 
   signal cs, ns: state := idle;
   signal intReg: regType := (others => (others => '0'));
   signal intMaxAddr: unsigned (7 downto 0) := (others => '0');
-  signal intNewreg: std_logic := '0';
-
+  signal intNewReg, regFill: std_logic := '0';
+begin
   stateUpdate: process(clk)
   begin
     if rising_edge(clk) then
@@ -56,17 +56,17 @@ architecture behavioral of toOpReg is
   begin
     if rising_edge(clk) then
       if regFill = '1' then
-        if op = add then
+        if opPort = sum then
           intReg(0) <= "00101011";
           intReg(1) <= "00100000";
-        elsif op = sub then
+        elsif opPort = sub then
           intReg(0) <= "10010110";
           intReg(1) <= "00100000";
-        elsif op = mult then
+        elsif opPort = mult then
           intReg(0) <= "11010111";
           intReg(1) <= "00100000"; 
         end if;
-        intMaxAddr <= to_unsigned(2 downto 0);
+        intMaxAddr <= to_unsigned(2, 8);
       end if;
     end if;  
   end process;

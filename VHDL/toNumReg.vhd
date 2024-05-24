@@ -5,7 +5,7 @@ use IEEE.numeric_std.all;
 
 library work;
 use work.myPackage.all;
-use work.fixed_pkg.all;
+--use work.fixed_pkg.all;
 
 entity toNumReg is
 port (clk: in std_logic;
@@ -109,13 +109,13 @@ begin
       end if;
       
       if count = '1' then
-        if to_integer(num) > 9999 then
+        if to_integer(numPort) > 9999 then
           numDig <= to_unsigned(5, 3);
-        elsif to_integer(num) > 999 and to_integer(num) < 10000 then
+        elsif to_integer(numPort) > 999 and to_integer(numPort) < 10000 then
           numDig <= to_unsigned(4, 3);
-        elsif to_integer(num) > 99 and to_integer(num) < 1000 then
+        elsif to_integer(numPort) > 99 and to_integer(numPort) < 1000 then
           numDig <= to_unsigned(3, 3);
-        elsif ((to_integer(num) > 9) and (to_integer(num) < 100)) then
+        elsif ((to_integer(numPort) > 9) and (to_integer(numPort) < 100)) then
           numDig <= to_unsigned(2, 3);
         else
           numDig <= to_unsigned(1, 3);
@@ -150,7 +150,7 @@ begin
 
       if space = '1' then
         intReg(to_integer(intAddr)) <= "00100000";
-        intAddr <= intAdd + 1;
+        intAddr <= intAddr + 1;
       end if;
     end if;
   
