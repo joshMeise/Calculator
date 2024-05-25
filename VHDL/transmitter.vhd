@@ -50,7 +50,7 @@ begin
         end if;
         
         tcBaud <= '0';
-        if baudCtr = 108 then
+        if baudCtr = 10416 then
         	tcBaud <= '1';
         end if;
         
