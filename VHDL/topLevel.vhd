@@ -21,6 +21,12 @@ architecture structural of calculator is
     port (clkExtPort: in std_logic;
           clkPort: out std_logic);
   end component;
+
+  component buttonInterface is
+    port(clk: in  std_logic;
+       buttonPort: in  std_logic;
+       buttonMpPort: out std_logic);
+  end component;
   
   component fsm is
     port (clk: in std_logic;
@@ -95,7 +101,7 @@ architecture structural of calculator is
           TCDonePort: out std_logic);
   end component;
 
-  signal clk, ansSend, ASend, BSend, opSend, AEn, BEn, sumEn, multEn, subEn, resetEn, calcEn, newNum, newNumReg, newOpReg, newAnsReg, newReg, TCDone: std_logic := '0';
+  signal clk, ansSend, ASend, BSend, opSend, AEn, BEn, sumEn, multEn, subEn, resetEn, calcEn, newNum, newNumReg, newOpReg, newAnsReg, newReg, TCDone, loadSig, addSig, subSig, multSig, resetSig: std_logic := '0';
   signal A, B, ans, num: signed(15 downto 0) := (others => '0');
   signal op: opType := sum;
   signal numMaxAddr, opMaxAddr, ansMaxAddr, maxAddr: unsigned(7 downto 0) := (others => '0');
@@ -107,13 +113,38 @@ begin
     port map(clkExtPort => clkExtPort,
              clkPort => clk);
 
+  loadBtn: buttonInterface
+    port map (clk => clk,
+              buttonPort => loadExtPort,
+              buttonMpPort => loadSig);
+
+  resetBtn: buttonInterface
+    port map (clk => clk,
+              buttonPort => resetExtPort,
+              buttonMpPort => resetSig);
+
+  addBtn: buttonInterface
+    port map (clk => clk,
+              buttonPort => sumExtPort,
+              buttonMpPort => addSig);
+
+  subBtn: buttonInterface
+    port map (clk => clk,
+              buttonPort => subExtPort,
+              buttonMpPort => subSig);
+
+  multBtn: buttonInterface
+    port map (clk => clk,
+              buttonPort => multExtPort,
+              buttonMpPort => multSig);
+  
   controller: fsm
     port map (clk => clk,
-              sumPort => sumExtPort,              
-              multPort => multExtPort,
-              subPort => subExtPort,
-              loadPort => loadExtPort,
-              resetPort => resetExtPort,
+              sumPort => addSig,              
+              multPort => multSig,
+              subPort => subSig,
+              loadPort => loadSig,
+              resetPort => resetSig,
               TCDonePort => TCDone,
               AEnPort => AEn,
               BEnPort => BEn,
