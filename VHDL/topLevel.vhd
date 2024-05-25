@@ -6,7 +6,7 @@ library work;
 use work.myPackage.all;
 
 entity calculator is
-  port (clk: in std_logic;
+  port (clkExtPort: in std_logic;
         sumExtPort: in std_logic;
         multExtPort: in std_logic;
         subExtPort: in std_logic;
@@ -17,6 +17,11 @@ entity calculator is
 end calculator;
         
 architecture structural of calculator is
+  component clockGenerator is
+    port (clkExtPort: in std_logic;
+          clkPort: out std_logic);
+  end component;
+  
   component fsm is
     port (clk: in std_logic;
           sumPort: in std_logic;
@@ -90,13 +95,17 @@ architecture structural of calculator is
           TCDonePort: out std_logic);
   end component;
 
-  signal ansSend, ASend, BSend, opSend, AEn, BEn, sumEn, multEn, subEn, resetEn, calcEn, newNum, newNumReg, newOpReg, newAnsReg, newReg, TCDone: std_logic := '0';
+  signal clk, ansSend, ASend, BSend, opSend, AEn, BEn, sumEn, multEn, subEn, resetEn, calcEn, newNum, newNumReg, newOpReg, newAnsReg, newReg, TCDone: std_logic := '0';
   signal A, B, ans, num: signed(15 downto 0) := (others => '0');
   signal op: opType := sum;
   signal numMaxAddr, opMaxAddr, ansMaxAddr, maxAddr: unsigned(7 downto 0) := (others => '0');
   signal numReg, opReg, ansReg, reg: regType := (others => (others => '0'));
 
 begin
+
+  clkGen: clockGenerator
+    port map(clkExtPort => clkExtPort,
+             clkPort => clk);
 
   controller: fsm
     port map (clk => clk,
