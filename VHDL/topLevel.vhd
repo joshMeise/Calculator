@@ -155,7 +155,7 @@ begin
               newNumPort => ansSend,
               maxAddrPort => ansMaxAddr,
               newRegPort => newAnsReg,
-              regport => opReg);
+              regport => ansReg);
 
   transmitter: trans
     port map(clk => clk,

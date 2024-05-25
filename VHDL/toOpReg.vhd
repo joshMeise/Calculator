@@ -56,16 +56,16 @@ begin
   begin
     if rising_edge(clk) then
       if regFill = '1' then
-        --if opPort = sum then
+        if opPort = sum then
          intReg(0) <= "00101011";
           intReg(1) <= "00100000";
-       -- elsif opPort = sub then
-        --  intReg(0) <= "10010110";
-        --  intReg(1) <= "00100000";
-       -- elsif opPort = mult then
-        --  intReg(0) <= "11010111";
-        --  intReg(1) <= "00100000"; 
-       -- end if;
+        elsif opPort = sub then
+          intReg(0) <= "10010110";
+          intReg(1) <= "00100000";
+        elsif opPort = mult then
+          intReg(0) <= "11010111";
+          intReg(1) <= "00100000"; 
+        end if;
         intMaxAddr <= to_unsigned(2, 8);
       end if;
     end if;  
