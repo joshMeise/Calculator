@@ -24,7 +24,7 @@ entity fsm is
 end fsm;
 
 architecture behavioral of fsm is
-  type state is (reset, waitA, acceptA, sendA, waitSendA, waitOp, acceptAdd, acceptSub, acceptMult, sendOp, waitSendOp, waitB, acceptB, sendB, waitSendB, calc, sendCalc, waitSendCalc);
+  type state is (reset, waitA, acceptA, sendAMp, sendA, waitOp, acceptAdd, acceptSub, acceptMult, sendOpMp, sendOp, waitB, acceptB, sendBMp, sendB, calc, sendCalcMp, sendCalc);
 
   signal cs, ns: state := reset;
 
@@ -63,11 +63,11 @@ begin
         end if;
       when acceptA =>
         AEnPort <= '1';
+        ns <= sendAMp;
+      when sendAMp =>
+      	ASendPort <= '1';
         ns <= sendA;
       when sendA =>
-        ASendPort <= '1';
-        ns <= waitSendA;
-      when waitSendA => 
         if TCDonePort = '1' then
           ns <= waitOp;
         end if;
@@ -83,17 +83,17 @@ begin
         end if;
       when acceptAdd =>
         sumEnPort <= '1';
-        ns <= sendOp;
+        ns <= sendOpMp;
       when acceptSub =>
         subEnPort <= '1';
-        ns <= sendOp;
+        ns <= sendOpMp;
       when acceptMult =>
         multEnPort <= '1';
+        ns <= sendOpMp;
+      when sendOpMp =>
+      	opSendPort <= '1';
         ns <= sendOp;
       when sendOp =>
-        opSendPort <= '1';
-        ns <= waitSendOp;
-      when waitSendOp =>
         if TCDonePort = '1' then
           ns <= waitB;
         end if;
@@ -105,21 +105,21 @@ begin
         end if;
       when acceptB =>
         BEnPort <= '1';
+        ns <= sendBMp;
+      when sendBMp =>
+        BSendPort <= '1';
         ns <= sendB;
       when sendB =>
-        BSendPort <= '1';
-        ns <= waitSendB;
-      when waitSendB =>
         if TCDonePort = '1' then
           ns <= calc;
         end if;
       when calc =>
         calcEnPort <= '1';
+        ns <= sendCalcMp;
+      when sendCalcMp =>
+      	ansSendPort <= '1';
         ns <= sendCalc;
       when sendCalc =>
-        ansSendPort <= '1';
-        ns <= waitSendCalc;
-      when waitSendCalc =>
         if TCDonePort = '1' then
           ns <= reset;
         end if;

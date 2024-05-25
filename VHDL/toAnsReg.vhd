@@ -5,7 +5,7 @@ use IEEE.numeric_std.all;
 
 library work;
 use work.myPackage.all;
-use work.fixed_pkg.all;
+--use work.fixed_pkg.all;
 
 entity toAnsReg is
 port (clk: in std_logic;

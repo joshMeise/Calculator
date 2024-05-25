@@ -60,7 +60,7 @@ architecture structural of calculator is
           BSendPort: out std_logic;
           opSendPort: out std_logic;
           ansSendPort: out std_logic);
-  end fsm;
+  end component;
 
   signal AEn, BEn, sumEn, subEn, multEn, resetEn, calcEn: std_logic := '0';
   
