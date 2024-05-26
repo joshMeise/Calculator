@@ -44,15 +44,16 @@ begin
 
   stim: process
   begin
+    wait for 4000ns;
     inputExtPort <= "0000000000001001";
     loadExtPort <= '1';
     wait for 2000ns;
     loadExtPort <= '0';
-    wait for 400000ns;
+    wait for 4500000ns;
     subExtPort <= '1';
     wait for 2000ns;
     subExtPort <= '0';
-    wait for 400000ns;
+    wait for 4500000ns;
     inputExtPort <= "0000000000001000";
     loadExtPort <= '1';
     wait for 2000ns;

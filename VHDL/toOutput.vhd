@@ -9,8 +9,8 @@ use work.myPackage.all;
 
 entity toOutput is
 port (clk: in std_logic;
-	  TxReady: in std_logic;
-	  reg: in regType;
+      TxReady: in std_logic;
+      reg: in regType;
       newReg: in std_logic;
       maxAddr: in unsigned(7 downto 0);
       data: out std_logic_vector(7 downto 0);
@@ -19,7 +19,7 @@ port (clk: in std_logic;
 end toOutput;     
       
 architecture behavioral of toOutput is
-	type state is (idle, waitToSend, loadData, sendToSCI, sending, done);
+	type state is (reset, idle, waitToSend, loadData, sendToSCI, sending, done);
 	
     signal cs, ns: state := idle;
 	signal intData: std_logic_vector(7 downto 0) := (others => '0');
@@ -44,8 +44,11 @@ begin
         TCdone <= '0';
         
         case cs is
+--          when reset =>
+            --clr <= '1';
+  --          ns <= idle;
         	when idle =>
-            	clr <= '1';
+            clr <= '1';
             	if newReg = '1' then
                 	ns <= loadData;
                 end if;
@@ -78,19 +81,20 @@ begin
     datapath: process(clk, addr, maxAddr)
     begin
     	if rising_edge(clk) then
-        	if read = '1' then
-            	intData <= reg(to_integer(addr));
-                addr <= addr + 1;
-            end if;
-            if clr = '1' then
-            	addr <= (others => '0');
-  			end if;
+        if read = '1' then
+          intData <= reg(to_integer(addr));
+          addr <= addr + 1;
         end if;
-        
-        empty <= '0';
-        if addr = maxAddr then
-        	empty <= '1';
+        if clr = '1' then
+          --intData <= (others => '0');
+          addr <= (others => '0');
         end if;
+      end if;
+      
+      empty <= '0';
+      if addr = maxAddr then
+        empty <= '1';
+      end if;
     end process;
     
     newData <= intNewData;

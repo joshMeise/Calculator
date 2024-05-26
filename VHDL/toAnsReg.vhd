@@ -17,15 +17,15 @@ port (clk: in std_logic;
 end toAnsReg;
 
 architecture behavioral of toAnsReg is
-	type state is (idle, addEq, countDig, checkNeg, goToNeg, writeNeg, conv, writeConv, addNewline, send);
+	type state is (reset, idle, addEq, countDig, checkNeg, goToNeg, writeNeg, conv, writeConv, addNewline, send);
     
-  signal cs, ns: state := idle;
+  signal cs, ns: state := reset;
 	signal intAddr: unsigned(7 downto 0) := (others => '0');
   signal intData: unsigned(15 downto 0) := (others => '0');
   signal intReg: regType := (others => (others => '0'));
   signal intNewReg: std_logic := '0';
   signal TCconvert: std_logic := '0';
-  signal write, wtNeg, neg, clrReg, count, convert, chNeg, equal, newLine: std_logic := '0';
+  signal write, clr, wtNeg, neg, clrReg, count, convert, chNeg, equal, newLine: std_logic := '0';
   signal writeData, r1, r0: std_logic_vector(7 downto 0) := (others => '0');
   signal numDig: unsigned(2 downto 0) := (others => '0');
   signal dig: unsigned(3 downto 0) := (others => '0');
@@ -51,8 +51,12 @@ begin
     count <= '0';
     newLine <= '0';
     equal <= '0';
+    clr <= '0';
     
     case cs is
+      when reset =>
+        clr <= '1';
+        ns <= idle;
       when idle =>
         if newNumPort = '1' then
           ns <= addEq;
@@ -91,14 +95,18 @@ begin
         ns <= send;
       when send =>
         intNewReg <= '1';
-        ns <= idle;
+        ns <= reset;
       when others =>
-        ns <= idle;
+        ns <= reset;
     end case;
   end process;
   
 	datapath: process(clk, numDig, dig)
   begin
+    if clr = '1' then
+      intReg <= (others => (others => '0'));
+      intAddr <= (others => '0');
+    end if;
     if rising_edge(clk) then
       if equal = '1' then
         intReg(0) <= "00111101";

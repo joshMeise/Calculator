@@ -205,10 +205,10 @@ begin
              TxPort => TXExtPort,
              TCDonePort => TCDone);
 
-  newNum <= ASend or BSend;
-  newReg <= newNumReg or newOpReg or newAnsReg;
+  newNum <= (ASend or BSend);
+  newReg <= (newNumReg or newOpReg or newAnsReg);
   
-  updateRegAndAddr: process(newOpReg, newNumReg, opMaxAddr, numMaxAddr, ansMaxAddr, opReg, numReg, ansReg)
+  updateRegAndAddr: process(newOpReg, newNumReg, newAnsReg, opMaxAddr, numMaxAddr, ansMaxAddr, opReg, numReg, ansReg)
   begin
     if newOpReg = '1' then
       maxAddr <= opMaxAddr;
@@ -216,13 +216,13 @@ begin
     elsif newNumReg = '1' then
       maxAddr <= numMaxAddr;
       reg <= numReg;
-    elsif newOpReg  = '1' then
+    elsif newAnsReg  = '1' then
       maxAddr <= ansMaxAddr;
       reg <= ansReg;
     end if;
   end process;  
 
-  updateNum: process(ansSend, ASend, BSend, A, B)
+  updateNum: process(ASend, BSend, A, B)
   begin
     if ASend = '1' then
       num <= A;

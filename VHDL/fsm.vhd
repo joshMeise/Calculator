@@ -24,7 +24,7 @@ entity fsm is
 end fsm;
 
 architecture behavioral of fsm is
-  type state is (reset, waitA, acceptA, sendAMp, sendA, waitOp, acceptAdd, acceptSub, acceptMult, sendOpMp, sendOp, waitB, acceptB, sendBMp, sendB, calc, sendCalcMp, sendCalc);
+  type state is (reset, waitA, acceptA, sendAMp, sendA, waitOp, acceptAdd, acceptSub, acceptMult, sendOpMp, sendOp, waitB, acceptB, sendBMp, sendB, waitCalc, calc, sendCalcMp, sendCalc);
 
   signal cs, ns: state := reset;
 
@@ -112,8 +112,10 @@ begin
         ns <= sendB;
       when sendB =>
         if TCDonePort = '1' then
-          ns <= calc;
+          ns <= waitCalc;
         end if;
+      when waitCalc =>
+        ns <= calc;
       when calc =>
         calcEnPort <= '1';
         ns <= sendCalcMp;
