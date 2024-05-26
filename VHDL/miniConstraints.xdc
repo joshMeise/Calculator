@@ -8,9 +8,9 @@
 ## External_Clock_Port
 ##====================================================================
 ## This is a 100 MHz external clock
-set_property PACKAGE_PIN W5 [get_ports clkExtPort]							
-	set_property IOSTANDARD LVCMOS33 [get_ports clkExtPort]
-	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clkExtPort]
+set_property PACKAGE_PIN W5 [get_ports clkExt]							
+	set_property IOSTANDARD LVCMOS33 [get_ports clkExt]
+	create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports clkExt]
 
 ##====================================================================
 ## Switch_ports
@@ -39,38 +39,14 @@ set_property PACKAGE_PIN W14 [get_ports {inputExtPort[6]}]
 ## SWITCH 7
 set_property PACKAGE_PIN W13 [get_ports {inputExtPort[7]}]					
 	set_property IOSTANDARD LVCMOS33 [get_ports {inputExtPort[7]}]
-## SWITCH 8
-set_property PACKAGE_PIN V2 [get_ports {inputExtPort[8]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {inputExtPort[8]}]
-## SWITCH 9
-set_property PACKAGE_PIN T3 [get_ports {inputExtPort[9]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {inputExtPort[9]}]
-## SWITCH 10
-set_property PACKAGE_PIN T2 [get_ports {inputExtPort[10]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {inputExtPort[10]}]
-## SWITCH 11
-set_property PACKAGE_PIN R3 [get_ports {inputExtPort[11]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {inputExtPort[11]}]
-## SWITCH 12
-set_property PACKAGE_PIN W2 [get_ports {inputExtPort[12]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {inputExtPort[12]}]
-## SWITCH 13
-set_property PACKAGE_PIN U1 [get_ports {inputExtPort[13]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {inputExtPort[13]}]
-## SWITCH 14
-set_property PACKAGE_PIN T1 [get_ports {inputExtPort[14]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {inputExtPort[14]}]
-## SWITCH 15 (LEFT MOST SWITCH)
-set_property PACKAGE_PIN R2 [get_ports {inputExtPort[15]}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {inputExtPort[15]}]
  
 ##====================================================================
 ## LED_ports
 ##====================================================================
 ## LED 0 (RIGHT MOST LED)
-#set_property PACKAGE_PIN U16 [get_ports {LED_ext_port[0]}]					
-	#set_property IOSTANDARD LVCMOS33 [get_ports {LED_ext_port[0]}]
-## LED 1
+#set_property PACKAGE_PIN U16 [get_ports {TXReady}]					
+	#set_property IOSTANDARD LVCMOS33 [get_ports {TXReady}]
+## LED 1s
 #set_property PACKAGE_PIN E19 [get_ports {LED_ext_port[1]}]					
 	#set_property IOSTANDARD LVCMOS33 [get_ports {LED_ext_port[1]}]
 ## LED 2
@@ -157,20 +133,8 @@ set_property PACKAGE_PIN R2 [get_ports {inputExtPort[15]}]
 ## Buttons
 ##====================================================================
 ## CENTER BUTTON
-set_property PACKAGE_PIN U18 [get_ports multExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports multExtPort]
-## UP BUTTON
-set_property PACKAGE_PIN T18 [get_ports sumExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports sumExtPort]
-## LEFT BUTTON
-set_property PACKAGE_PIN W19 [get_ports loadExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports loadExtPort]
-## RIGHT BUTTON
-set_property PACKAGE_PIN T17 [get_ports resetExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports resetExtPort]
-## DOWN BUTTON
-set_property PACKAGE_PIN U17 [get_ports subExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports subExtPort]
+set_property PACKAGE_PIN U18 [get_ports buttonPort]						
+	set_property IOSTANDARD LVCMOS33 [get_ports buttonPort]
  
 
 ##====================================================================
@@ -337,8 +301,8 @@ set_property PACKAGE_PIN U17 [get_ports subExtPort]
 ##====================================================================
 #set_property PACKAGE_PIN B18 [get_ports RsRx_ext_port]						
 	#set_property IOSTANDARD LVCMOS33 [get_ports RsRx_ext_port]
-set_property PACKAGE_PIN A18 [get_ports TxExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports TxExtPort]
+set_property PACKAGE_PIN A18 [get_ports TxPort]						
+	set_property IOSTANDARD LVCMOS33 [get_ports TxPort]
 
 ##====================================================================
 ## USB HID (PS/2)

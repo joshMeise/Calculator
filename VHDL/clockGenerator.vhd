@@ -14,12 +14,12 @@ end clockGenerator;
 architecture behavioral of clockGenerator is
 
   constant clkDividerTC: integer := 50;
-  constant countLen: integer := integer(ceil(log2(real(clockDividerTC))));
+  constant countLen: integer := integer(ceil(log2(real(clkDividerTC))));
   signal clkDividerCtr: unsigned(countLen-1 downto 0) := (others => '0');
   signal clkTog: std_logic := '0';
   
 begin
-  clockDivider: process(clkExt)
+  clockDivider: process(clkExtPort)
   begin
     if rising_edge(clkExtPort) then
       if clkDividerCtr = clkDividerTC - 1 then

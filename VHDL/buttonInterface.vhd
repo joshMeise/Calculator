@@ -19,10 +19,10 @@ architecture behavioral of buttonInterface is
 
   type state is (low, lowToHigh, high, highToLow);
   signal cs, ns: state := low;
-  signal ctr: unsigned(7 downto 0) := (others => '0');
+  signal counter: unsigned(7 downto 0) := (others => '0');
   signal reset: std_logic := '0';
   signal timeout: std_logic := '0';
-  constant maxCount: integer := 100;
+  constant maxCount: integer := 10;
   signal debounced: std_logic := '0';
 
   signal mpDelayReg	: std_logic := '0';
@@ -43,7 +43,7 @@ begin
     end if;
   end process;
 
-  combinational: process(cs, debounced, synchronizedButtonPress, timeout)
+  combinational: process(cs, synchronizedButtonPress, timeout)
   begin
     -- Defaults.
     ns <= cs;
@@ -64,7 +64,7 @@ begin
         end if;
       when high =>
         debounced <= '1';
-        if synchrinizedButtonPress = '0' then
+        if synchronizedButtonPress = '0' then
           ns <= highToLow;
         end if;
       when highToLow =>
@@ -96,11 +96,11 @@ begin
     end if;
   end process;
   
-  monopulser: process(clk, debounced, mpDelayReg)
+  monopulser: process(clk, buttonPort, mpDelayReg)
   begin	
-    if rising_edge(clk_port) then	
-      mpDelayReg <= debounced;
+    if rising_edge(clk) then	
+      mpDelayReg <= buttonPort;
     end if;
-    buttonMpPort <= debounced and not(mpDelayReg);
+    buttonMpPort <= buttonPort and not(mpDelayReg);
   end process monopulser;
 end behavioral;

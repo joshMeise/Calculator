@@ -3,8 +3,8 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 --use IEEE.fixed_pkg.all;
 
-library work;
-use work.myPackage.all;
+--library work;
+--suse work.myPackage.all;
 --use work.fixed_pkg.all;
 
 entity transmitter is
@@ -50,7 +50,7 @@ begin
         end if;
         
         tcBaud <= '0';
-        if baudCtr = 10416 then
+        if baudCtr = 104 then
         	tcBaud <= '1';
         end if;
         

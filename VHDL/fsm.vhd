@@ -50,6 +50,7 @@ begin
     BSendPort <= '0';
     opSendPort <= '0';
     ansSendPort <= '0';
+    ns <= cs;
 
     case cs is
       when reset =>

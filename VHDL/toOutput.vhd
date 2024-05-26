@@ -34,7 +34,7 @@ begin
         end if;
     end process;
     
-    combinational: process(cs, TxReady, newReg)
+    combinational: process(cs, TxReady, newReg, empty)
   	begin
     	-- Dafaults.
         ns <= cs;
@@ -75,7 +75,7 @@ begin
         end case;
     end process;
     
-    datapath: process(clk, addr)
+    datapath: process(clk, addr, maxAddr)
     begin
     	if rising_edge(clk) then
         	if read = '1' then

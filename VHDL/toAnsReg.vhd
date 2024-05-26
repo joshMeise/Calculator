@@ -17,7 +17,7 @@ port (clk: in std_logic;
 end toAnsReg;
 
 architecture behavioral of toAnsReg is
-	type state is (idle, addEq, countDig, checkNeg, writeNeg, conv, writeConv, addNewline, send);
+	type state is (idle, addEq, countDig, checkNeg, goToNeg, writeNeg, conv, writeConv, addNewline, send);
     
   signal cs, ns: state := idle;
 	signal intAddr: unsigned(7 downto 0) := (others => '0');
@@ -65,7 +65,8 @@ begin
         ns <= checkNeg;
       when checkNeg =>
         chNeg <= '1';
-        
+        ns <= goToNeg;
+      when goToNeg =>
         if neg = '1' then
           ns <= writeNeg;
         else

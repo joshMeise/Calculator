@@ -24,8 +24,8 @@ architecture structural of calculator is
 
   component buttonInterface is
     port(clk: in  std_logic;
-       buttonPort: in  std_logic;
-       buttonMpPort: out std_logic);
+         buttonPort: in  std_logic;
+         buttonMpPort: out std_logic);
   end component;
   
   component fsm is
@@ -208,7 +208,7 @@ begin
   newNum <= ASend or BSend;
   newReg <= newNumReg or newOpReg or newAnsReg;
   
-  updateRegAndAddr: process(newOpReg, newNumReg)
+  updateRegAndAddr: process(newOpReg, newNumReg, opMaxAddr, numMaxAddr, ansMaxAddr, opReg, numReg, ansReg)
   begin
     if newOpReg = '1' then
       maxAddr <= opMaxAddr;
@@ -222,7 +222,7 @@ begin
     end if;
   end process;  
 
-  updateNum: process(ansSend, ASend, BSend)
+  updateNum: process(ansSend, ASend, BSend, A, B)
   begin
     if ASend = '1' then
       num <= A;
