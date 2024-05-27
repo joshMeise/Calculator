@@ -127,7 +127,7 @@ begin
           numDig <= to_unsigned(4, 3);
         elsif abs(to_integer(numPort)) > 99 and abs(to_integer(numPort)) < 1000 then
           numDig <= to_unsigned(3, 3);
-        elsif abs(to_integer(numPort)) > 9 and abs(to_integer(numPort)) < 100) then
+        elsif abs(to_integer(numPort)) > 9 and abs(to_integer(numPort)) < 100 then
           numDig <= to_unsigned(2, 3);
         else
           numDig <= to_unsigned(1, 3);

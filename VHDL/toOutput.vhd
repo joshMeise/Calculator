@@ -46,11 +46,11 @@ begin
         load <= '0';
         
         case cs is
---          when reset =>
-            --clr <= '1';
-  --          ns <= idle;
-        	when idle =>
+          when reset =>
             clr <= '1';
+            ns <= idle;
+        	when idle =>
+            --clr <= '1';
             	if newReg = '1' then
                 ns <= latch;                
               end if;
@@ -77,7 +77,7 @@ begin
                 end if;
             when done =>
             	TCdone <= '1';
-                ns <= idle;
+                ns <= reset;
             when others =>
             	ns <= idle;
         end case;
@@ -94,10 +94,10 @@ begin
           intData <= intReg(to_integer(addr));
           addr <= addr + 1;
         end if;
-        if clr = '1' then
+        --if clr = '1' then
           --intData <= (others => '0');
-          addr <= (others => '0');
-        end if;
+          --addr <= (others => '0');
+        --end if;
       end if;
       
       empty <= '0';
