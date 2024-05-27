@@ -103,11 +103,11 @@ begin
   
 	datapath: process(clk, numDig, dig)
   begin
-    if clr = '1' then
-      intReg <= (others => (others => '0'));
-      intAddr <= (others => '0');
-    end if;
     if rising_edge(clk) then
+      if clr = '1' then
+        intReg <= (others => (others => '0'));
+        intAddr <= (others => '0');
+      end if;
       if equal = '1' then
         intReg(0) <= "00111101";
         intReg(1) <= "00100000";

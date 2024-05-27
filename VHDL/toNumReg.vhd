@@ -17,7 +17,7 @@ port (clk: in std_logic;
 end toNumReg;
 
 architecture behavioral of toNumReg is
-	type state is (reset, idle, countDig, checkNeg, goToNeg, writeNeg, conv, writeConv, addSpace, send);
+	type state is (reset, idle, countDig, checkNeg, goToNeg, writeNeg, conv, writeConv, addSpace, waitToClear, send);
     
   signal cs, ns: state := idle;
 	signal intAddr: unsigned(7 downto 0) := (others => '0');
@@ -91,6 +91,8 @@ begin
         ns <= send;
       when send =>
         intNewReg <= '1';
+        ns <= waitToClear;
+      when waitToClear =>
         ns <= reset;
       when others =>
         ns <= reset;
@@ -100,10 +102,10 @@ begin
 	datapath: process(clk, numDig, dig)
   begin
     if rising_edge(clk) then
-      if clr = '1' then
-        intAddr <= (others => '0');
-        intReg <= (others => (others => '0'));
-      end if;
+      --if clr = '1' then
+        --intAddr <= (others => '0');
+        --intReg <= (others => (others => '0'));
+      --end if;
       
       neg <= '0';
       if chNeg = '1' then
@@ -159,8 +161,9 @@ begin
       end if;
 
       if space = '1' then
-        intReg(to_integer(intAddr)) <= "00100000";
-        intAddr <= intAddr + 1;
+        intReg(to_integer(intAddr)) <= "00001010";
+        intReg(to_integer(intAddr + 1)) <= "00001101";
+        intAddr <= intAddr + 2;
       end if;
     end if;
   

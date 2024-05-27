@@ -19,12 +19,13 @@ port (clk: in std_logic;
 end toOutput;     
       
 architecture behavioral of toOutput is
-	type state is (reset, idle, waitToSend, loadData, sendToSCI, sending, done);
+	type state is (reset, idle, latch, waitToSend, loadData, sendToSCI, sending, done);
 	
-    signal cs, ns: state := idle;
-	signal intData: std_logic_vector(7 downto 0) := (others => '0');
-    signal intNewData, empty, read, clr: std_logic := '0';
-    signal addr: unsigned(7 downto 0) := (others => '0');
+  signal cs, ns: state := idle;
+  signal intData: std_logic_vector(7 downto 0) := (others => '0');
+  signal intNewData, empty, read, clr, load: std_logic := '0';
+  signal addr, intMaxAddr: unsigned(7 downto 0) := (others => '0');
+  signal intReg: regType := (others => (others => '0'));
     
 begin
 	stateUpdate: process(clk)
@@ -42,6 +43,7 @@ begin
         read <= '0';
         clr <= '0';
         TCdone <= '0';
+        load <= '0';
         
         case cs is
 --          when reset =>
@@ -50,15 +52,18 @@ begin
         	when idle =>
             clr <= '1';
             	if newReg = '1' then
-                	ns <= loadData;
-                end if;
-            when loadData =>
+                ns <= latch;                
+              end if;
+          when latch =>
+            load <= '1';
+            ns <= loadData;
+          when loadData =>
             	read <= '1';
-                ns <= waitToSend;
+              ns <= waitToSend;
         	when waitToSend =>
             	if TxReady = '1' then
-                	ns <= sendToSci;
-                end if;
+                ns <= sendToSci;
+              end if;
         	when sendToSCI =>
             	intNewData <= '1';
                 ns <= sending;
@@ -81,8 +86,12 @@ begin
     datapath: process(clk, addr, maxAddr)
     begin
     	if rising_edge(clk) then
+        if load = '1' then
+          intReg <= reg;
+          intMaxAddr <= maxAddr;
+        end if;
         if read = '1' then
-          intData <= reg(to_integer(addr));
+          intData <= intReg(to_integer(addr));
           addr <= addr + 1;
         end if;
         if clr = '1' then
@@ -92,7 +101,7 @@ begin
       end if;
       
       empty <= '0';
-      if addr = maxAddr then
+      if addr = intMaxAddr then
         empty <= '1';
       end if;
     end process;
