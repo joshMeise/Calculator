@@ -1,0 +1,118 @@
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2021.2 (win64) Build 3367213 Tue Oct 19 02:48:09 MDT 2021
+| Date         : Mon May 27 10:36:53 2024
+| Host         : mecha-4 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file calculator_control_sets_placed.rpt
+| Design       : calculator
+| Device       : xc7a35t
+---------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    40 |
+|    Minimum number of control sets                        |    40 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |   109 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    40 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |    15 |
+| >= 6 to < 8        |    10 |
+| >= 8 to < 10       |     4 |
+| >= 10 to < 12      |     2 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     1 |
+| >= 16              |     6 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             156 |           72 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |              21 |            7 |
+| Yes          | No                    | No                     |              54 |           24 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             172 |           70 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-----------------------------------+------------------------------------------+---------------------------------------+------------------+----------------+--------------+
+|            Clock Signal           |               Enable Signal              |            Set/Reset Signal           | Slice Load Count | Bel Load Count | Bels / Slice |
++-----------------------------------+------------------------------------------+---------------------------------------+------------------+----------------+--------------+
+|  clkExtPort_IBUF_BUFG             |                                          |                                       |                1 |              1 |         1.00 |
+|  transmitter/tr/tcBit_reg_i_1_n_0 |                                          | transmitter/toOout/newData            |                1 |              1 |         1.00 |
+|  clkGen/clkPort                   | toAns/intReg[7][7]_i_2__0_n_0            | toAns/intReg[7][7]_i_1__0_n_0         |                1 |              4 |         4.00 |
+|  clkGen/clkPort                   | toNum/intData[13]_i_2_n_0                | toNum/intData[13]                     |                2 |              4 |         2.00 |
+|  clkGen/clkPort                   | toNum/intData[13]_i_2_n_0                |                                       |                4 |              4 |         1.00 |
+|  clkGen/clkPort                   | toAns/intData[13]_i_2__0_n_0             |                                       |                2 |              4 |         2.00 |
+|  clkGen/clkPort                   | toAns/intData[13]_i_2__0_n_0             | toAns/intData[13]                     |                3 |              4 |         1.33 |
+|  clkGen/clkPort                   | toAns/intReg[0][7]_i_2_n_0               | toAns/intReg[0][7]_i_1_n_0            |                2 |              4 |         2.00 |
+|  clkGen/clkPort                   | toAns/intReg[1][7]_i_2_n_0               | toAns/intReg[1][7]_i_1_n_0            |                2 |              4 |         2.00 |
+|  clkGen/clkPort                   | toAns/intReg[2][7]_i_2_n_0               | toAns/intReg[2][7]_i_1_n_0            |                1 |              4 |         4.00 |
+|  clkGen/clkPort                   | toAns/intReg[3][7]_i_2_n_0               | toAns/intReg[3][7]_i_1_n_0            |                1 |              4 |         4.00 |
+|  clkGen/clkPort                   | toAns/intReg[4][7]_i_2__0_n_0            | toAns/intReg[4][7]_i_1__0_n_0         |                2 |              4 |         2.00 |
+|  clkGen/clkPort                   | toAns/intReg[5][7]_i_2__0_n_0            | toAns/intReg[5][7]_i_1__0_n_0         |                1 |              4 |         4.00 |
+|  clkGen/clkPort                   | toAns/intReg[6][7]_i_2__0_n_0            | toAns/intReg[6][7]_i_1__0_n_0         |                2 |              4 |         2.00 |
+|  clkGen/clkPort                   | path/E[0]                                |                                       |                1 |              4 |         4.00 |
+|  clkGen/clkPort                   | controller/FSM_sequential_cs[4]_i_1_n_0  |                                       |                4 |              5 |         1.25 |
+|  clkGen/clkPort                   | transmitter/tr/baudCtr_reg[6]_0[0]       | transmitter/toOout/SR[0]              |                2 |              5 |         2.50 |
+|  clkExtPort_IBUF_BUFG             |                                          | clkGen/clkDividerCtr[5]_i_1_n_0       |                2 |              6 |         3.00 |
+|  clkGen/clkPort                   | toAns/intAddr[7]_i_2__0_n_0              | toAns/intAddr0_in[5]                  |                3 |              7 |         2.33 |
+|  clkGen/clkPort                   | toNum/intReg[0][7]_i_2__0_n_0            | toNum/intReg[0][7]_i_1__0_n_0         |                4 |              7 |         1.75 |
+|  clkGen/clkPort                   | toNum/intReg[2][7]_i_2__0_n_0            | toNum/intReg[2][7]_i_1__0_n_0         |                3 |              7 |         2.33 |
+|  clkGen/clkPort                   | toNum/intReg[3][7]_i_2__0_n_0            | toNum/intReg[3][7]_i_1__0_n_0         |                4 |              7 |         1.75 |
+|  clkGen/clkPort                   | toNum/intReg[4][7]_i_2_n_0               | toNum/intReg[4][7]_i_1_n_0            |                3 |              7 |         2.33 |
+|  clkGen/clkPort                   | toNum/intReg[1][7]_i_2__0_n_0            | toNum/intReg[1][7]_i_1__0_n_0         |                4 |              7 |         1.75 |
+|  clkGen/clkPort                   | toNum/intReg[5][7]_i_2_n_0               | toNum/intReg[5][7]_i_1_n_0            |                2 |              7 |         3.50 |
+|  clkGen/clkPort                   | toNum/intReg[6][7]_i_2_n_0               | toNum/intReg[6][7]_i_1_n_0            |                3 |              7 |         2.33 |
+|  clkGen/clkPort                   | toNum/intReg[7][7]_i_2_n_0               | toNum/intReg[7][7]_i_1_n_0            |                3 |              7 |         2.33 |
+|  clkGen/clkPort                   | transmitter/toOout/read                  |                                       |                4 |              8 |         2.00 |
+|  clkGen/clkPort                   | transmitter/toOout/read                  | transmitter/toOout/addr[7]_i_1_n_0    |                2 |              8 |         4.00 |
+|  clkGen/clkPort                   | toNum/intAddr[7]_i_2_n_0                 | toNum/intAddr                         |                3 |              8 |         2.67 |
+|  clkGen/clkPort                   | transmitter/toOout/E[0]                  |                                       |                2 |              8 |         4.00 |
+|  clkGen/clkPort                   | toNum/FSM_onehot_cs[9]_i_1_n_0           |                                       |                4 |             10 |         2.50 |
+|  clkGen/clkPort                   | toAns/FSM_onehot_cs[10]_i_1_n_0          |                                       |                3 |             11 |         3.67 |
+|  clkGen/clkPort                   |                                          | transmitter/toOout/E[0]               |                4 |             14 |         3.50 |
+|  clkGen/clkPort                   | controller/CEA2                          | controller/FSM_sequential_cs_reg[1]_1 |                8 |             16 |         2.00 |
+|  clkGen/clkPort                   | controller/FSM_sequential_cs_reg[0]_1[0] | controller/FSM_sequential_cs_reg[1]_1 |                4 |             16 |         4.00 |
+|  clkGen/clkPort                   | controller/FSM_sequential_cs_reg[0]_0    | path/B[15]_i_1_n_0                    |                5 |             16 |         3.20 |
+|  controller/E[0]                  |                                          |                                       |                8 |             16 |         2.00 |
+|  reg[7]__0                        |                                          |                                       |               20 |             65 |         3.25 |
+|  clkGen/clkPort                   |                                          |                                       |               43 |             74 |         1.72 |
++-----------------------------------+------------------------------------------+---------------------------------------+------------------+----------------+--------------+
+
+
