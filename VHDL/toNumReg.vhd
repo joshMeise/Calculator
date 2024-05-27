@@ -102,10 +102,10 @@ begin
 	datapath: process(clk, numDig, dig)
   begin
     if rising_edge(clk) then
-      --if clr = '1' then
-        --intAddr <= (others => '0');
-        --intReg <= (others => (others => '0'));
-      --end if;
+      if clr = '1' then
+        intAddr <= (others => '0');
+        intReg <= (others => (others => '0'));
+      end if;
       
       neg <= '0';
       if chNeg = '1' then
@@ -121,13 +121,13 @@ begin
       end if;
       
       if count = '1' then
-        if to_integer(numPort) > 9999 then
+        if abs(to_integer(numPort)) > 9999 then
           numDig <= to_unsigned(5, 3);
-        elsif to_integer(numPort) > 999 and to_integer(numPort) < 10000 then
+        elsif abs(to_integer(numPort)) > 999 and abs(to_integer(numPort)) < 10000 then
           numDig <= to_unsigned(4, 3);
-        elsif to_integer(numPort) > 99 and to_integer(numPort) < 1000 then
+        elsif abs(to_integer(numPort)) > 99 and abs(to_integer(numPort)) < 1000 then
           numDig <= to_unsigned(3, 3);
-        elsif ((to_integer(numPort) > 9) and (to_integer(numPort) < 100)) then
+        elsif abs(to_integer(numPort)) > 9 and abs(to_integer(numPort)) < 100) then
           numDig <= to_unsigned(2, 3);
         else
           numDig <= to_unsigned(1, 3);

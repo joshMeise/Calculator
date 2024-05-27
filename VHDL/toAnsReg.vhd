@@ -1,43 +1,57 @@
+--
+--toAnsReg.vhd --- converts a signed number to a series of 8 bit standard logic
+--vectors sroted in a register.
+--
+--Author: Josh Meise and Brandon Zhao
+--Created: 05-27-2024
+--Version: 1.0
+--
+
+-- Library inclusions.
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 --use IEEE.fixed_pkg.all;
-
 library work;
 use work.myPackage.all;
 --use work.fixed_pkg.all;
 
+-- Entity definition.
 entity toAnsReg is
-port (clk: in std_logic;
-      numPort: in signed(15 downto 0);
-      newNumPort: in std_logic;
-      maxAddrPort: out unsigned(7 downto 0);
-      newRegPort: out std_logic;
-      regPort: out regType);
+  port (clk: in std_logic;
+        numPort: in signed(15 downto 0);
+        newNumPort: in std_logic;
+        maxAddrPort: out unsigned(7 downto 0);
+        newRegPort: out std_logic;
+        regPort: out regType);
 end toAnsReg;
 
+-- Architecture definition.
 architecture behavioral of toAnsReg is
+  -- User-defined states.
 	type state is (reset, idle, addEq, countDig, checkNeg, goToNeg, writeNeg, conv, writeConv, addNewline, send);
-    
+
+  -- INternal and control signals.
   signal cs, ns: state := reset;
 	signal intAddr: unsigned(7 downto 0) := (others => '0');
   signal intData: unsigned(15 downto 0) := (others => '0');
   signal intReg: regType := (others => (others => '0'));
   signal intNewReg: std_logic := '0';
-  signal TCconvert: std_logic := '0';
-  signal write, clr, wtNeg, neg, clrReg, count, convert, chNeg, equal, newLine: std_logic := '0';
+  signal write, clr, wtNeg, neg, clrReg, count, convert, chNeg, equal, newLine, TCconvert: std_logic := '0';
   signal writeData, r1, r0: std_logic_vector(7 downto 0) := (others => '0');
   signal numDig: unsigned(2 downto 0) := (others => '0');
   signal dig: unsigned(3 downto 0) := (others => '0');
-begin
 
+begin
+  -- Synchronously update the state.
 	stateUpdate: process(clk)
   begin
     if rising_edge(clk) then
       cs <= ns;
     end if;
   end process;
-  
+
+  -- Next state and output logic for FSM.
   combinational: process(cs, newNumPort, TCconvert, neg)
 	begin
     -- Defaults.
@@ -54,17 +68,21 @@ begin
     clr <= '0';
     
     case cs is
+      -- Clear all registers and reset the address counter.
       when reset =>
         clr <= '1';
         ns <= idle;
+      -- Wait for a new number to be entered.
       when idle =>
         if newNumPort = '1' then
           ns <= addEq;
         end if;
+      -- Add an equal sign in front of the answer.
       when addEq =>
         equal <= '1';
         ns <= countDig;
-    when countDig =>
+      -- Count 
+      when countDig =>
         count <= '1';
         ns <= checkNeg;
       when checkNeg =>
@@ -128,13 +146,13 @@ begin
       end if;
       
       if count = '1' then
-        if to_integer(numPort) > 9999 then
+        if abs(to_integer(numPort)) > 9999 then
           numDig <= to_unsigned(5, 3);
-        elsif to_integer(numPort) > 999 and to_integer(numPort) < 10000 then
+        elsif abs(to_integer(numPort)) > 999 and abs(to_integer(numPort)) < 10000 then
           numDig <= to_unsigned(4, 3);
-        elsif to_integer(numPort) > 99 and to_integer(numPort) < 1000 then
+        elsif abs(to_integer(numPort)) > 99 and abs(to_integer(numPort)) < 1000 then
           numDig <= to_unsigned(3, 3);
-        elsif ((to_integer(numPort) > 9) and (to_integer(numPort) < 100)) then
+        elsif abs(to_integer(numPort)) > 9 and abs(to_integer(numPort)) < 100 then
           numDig <= to_unsigned(2, 3);
         else
           numDig <= to_unsigned(1, 3);
