@@ -93,7 +93,7 @@ begin
         intNewReg <= '1';
         ns <= waitToClear;
       when waitToClear =>
-        ns <= reset;
+            ns <= reset;
       when others =>
         ns <= reset;
     end case;

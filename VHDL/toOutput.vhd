@@ -50,7 +50,7 @@ begin
             clr <= '1';
             ns <= idle;
         	when idle =>
-            --clr <= '1';
+            clr <= '1';
             	if newReg = '1' then
                 ns <= latch;                
               end if;
@@ -83,7 +83,7 @@ begin
         end case;
     end process;
     
-    datapath: process(clk, addr, maxAddr)
+    datapath: process(clk, addr, intMaxAddr)
     begin
     	if rising_edge(clk) then
         if load = '1' then
@@ -94,10 +94,10 @@ begin
           intData <= intReg(to_integer(addr));
           addr <= addr + 1;
         end if;
-        --if clr = '1' then
-          --intData <= (others => '0');
-          --addr <= (others => '0');
-        --end if;
+        if clr = '1' then
+          intData <= (others => '0');
+          addr <= (others => '0');
+        end if;
       end if;
       
       empty <= '0';

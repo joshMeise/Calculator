@@ -199,7 +199,7 @@ begin
 
   transmitter: trans
     port map(clk => clk,
-             regPort=> reg,
+             regPort => reg,
              newRegPort => newReg,
              maxAddrPort => maxAddr,
              TxPort => TXExtPort,

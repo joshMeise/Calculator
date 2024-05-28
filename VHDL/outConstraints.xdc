@@ -157,20 +157,8 @@ set_property PACKAGE_PIN R2 [get_ports {inputExtPort[15]}]
 ## Buttons
 ##====================================================================
 ## CENTER BUTTON
-set_property PACKAGE_PIN U18 [get_ports multExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports multExtPort]
-## UP BUTTON
-set_property PACKAGE_PIN T18 [get_ports sumExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports sumExtPort]
-## LEFT BUTTON
-set_property PACKAGE_PIN W19 [get_ports loadExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports loadExtPort]
-## RIGHT BUTTON
-set_property PACKAGE_PIN T17 [get_ports resetExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports resetExtPort]
-## DOWN BUTTON
-set_property PACKAGE_PIN U17 [get_ports subExtPort]						
-	set_property IOSTANDARD LVCMOS33 [get_ports subExtPort]
+set_property PACKAGE_PIN U18 [get_ports btnExtPort]						
+	set_property IOSTANDARD LVCMOS33 [get_ports btnExtPort]
  
 
 ##====================================================================
@@ -235,8 +223,8 @@ set_property PACKAGE_PIN U17 [get_ports subExtPort]
 ## Pmod Header JC
 ##====================================================================
 ##Sch name = JC1
-set_property PACKAGE_PIN K17 [get_ports {TxExtPort}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {TxExtPort}]
+#set_property PACKAGE_PIN K17 [get_ports {JC_ext_port[0]}]					
+	#set_property IOSTANDARD LVCMOS33 [get_ports {JC_ext_port[0]}]
 ##Sch name = JC2
 #set_property PACKAGE_PIN M18 [get_ports {JC_ext_port[1]}]					
 	#set_property IOSTANDARD LVCMOS33 [get_ports {JC_ext_port[1]}]

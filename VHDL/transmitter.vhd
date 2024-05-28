@@ -54,8 +54,8 @@ begin
         	tcBaud <= '1';
         end if;
         
-        --tcBit <= '0';
-        if bitCtr = 10 then
+        tcBit <= '0';
+        if bitCtr = 104 then
         	tcBit <= '1';
         end if;
         if newData = '1' then
