@@ -46,9 +46,15 @@ begin
         load <= '0';
         
         case cs is
+<<<<<<< HEAD
           when reset =>
             clr <= '1';
             ns <= idle;
+=======
+--          when reset =>
+            --clr <= '1';
+  --          ns <= idle;
+>>>>>>> parent of f3e9a75 (output testing added)
         	when idle =>
             clr <= '1';
             	if newReg = '1' then
@@ -77,7 +83,7 @@ begin
                 end if;
             when done =>
             	TCdone <= '1';
-                ns <= reset;
+                ns <= idle;
             when others =>
             	ns <= idle;
         end case;
@@ -95,7 +101,11 @@ begin
           addr <= addr + 1;
         end if;
         if clr = '1' then
+<<<<<<< HEAD
           intData <= (others => '0');
+=======
+          --intData <= (others => '0');
+>>>>>>> parent of f3e9a75 (output testing added)
           addr <= (others => '0');
         end if;
       end if;
