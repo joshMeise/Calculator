@@ -141,7 +141,7 @@ begin
       end if;
       
       if wtNeg = '1' then
-        intReg(to_integer(intAddr)) <= "10010110";
+        intReg(to_integer(intAddr)) <= "00101101";
         intAddr <= intAddr + 1;
       end if;
       

@@ -60,10 +60,10 @@ begin
          intReg(0) <= "00101011";
           intReg(1) <= "00100000";
         elsif opPort = sub then
-          intReg(0) <= "10010110";
+          intReg(0) <= "00101101";
           intReg(1) <= "00100000";
         elsif opPort = mult then
-          intReg(0) <= "11010111";
+          intReg(0) <= "01111000";
           intReg(1) <= "00100000"; 
         end if;
         intMaxAddr <= to_unsigned(2, 8);

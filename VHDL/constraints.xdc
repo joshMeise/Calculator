@@ -235,8 +235,8 @@ set_property PACKAGE_PIN U17 [get_ports subExtPort]
 ## Pmod Header JC
 ##====================================================================
 ##Sch name = JC1
-set_property PACKAGE_PIN K17 [get_ports {TxExtPort}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {TxExtPort}]
+#set_property PACKAGE_PIN K17 [get_ports {TxExtPort}]					
+	#set_property IOSTANDARD LVCMOS33 [get_ports {TxExtPort}]
 ##Sch name = JC2
 #set_property PACKAGE_PIN M18 [get_ports {JC_ext_port[1]}]					
 	#set_property IOSTANDARD LVCMOS33 [get_ports {JC_ext_port[1]}]

@@ -70,6 +70,7 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 6
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -80,6 +81,7 @@ set_property webtalk.parent_dir O:/ENGS31/Proj/Run2/Run2.cache/wt [current_proje
 set_property parent.project_path O:/ENGS31/Proj/Run2/Run2.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
+set_property board_part_repo_paths {C:/Users/f004hf2/AppData/Roaming/Xilinx/Vivado/2021.2/xhub/board_store/xilinx_board_store} [current_project]
 set_property board_part digilentinc.com:basys3:part0:1.1 [current_project]
 set_property ip_output_repo o:/ENGS31/Proj/Run2/Run2.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]

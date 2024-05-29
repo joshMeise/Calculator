@@ -1,0 +1,14 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../VHDL/buttonInterface.vhd" \
+"../../../../../VHDL/clockGenerator.vhd" \
+"../../../../../VHDL/myPackage.vhd" \
+"../../../../../VHDL/output.vhd" \
+"../../../../../VHDL/toNumReg.vhd" \
+"../../../../../VHDL/toOutput.vhd" \
+"../../../../../VHDL/trans.vhd" \
+"../../../../../VHDL/transmitter.vhd" \
+"../../../../../VHDL/output_tb.vhd" \
+
+# Do not sort compile order
+nosort

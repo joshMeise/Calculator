@@ -55,7 +55,7 @@ begin
         end if;
         
         tcBit <= '0';
-        if bitCtr = 104 then
+        if bitCtr = 10 then
         	tcBit <= '1';
         end if;
         if newData = '1' then

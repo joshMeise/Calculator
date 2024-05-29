@@ -67,8 +67,10 @@ architecture structural of calculator is
   
   component toNumReg is
     port (clk: in std_logic;
-          numPort: in signed(15 downto 0);
-          newNumPort: in std_logic;
+          ANumPort: in signed(15 downto 0);
+          newANumPort: in std_logic;
+          BNumPort: in signed(15 downto 0);
+          newBNumPort: in std_logic;
           maxAddrPort: out unsigned(7 downto 0);
           newRegPort: out std_logic;
           regPort: out regType);
@@ -94,13 +96,19 @@ architecture structural of calculator is
 
   component trans is
     port (clk: in std_logic;
-          regPort: in regType;
-          newRegPort: in std_logic;
-          maxAddrPort: in unsigned(7 downto 0);
+          numRegPort: in regType;
+          newNumRegPort: in std_logic;
+          opRegPort: in regType;
+          newOpRegPort: in std_logic;
+          ansRegPort: regType;
+          newAnsRegPort: in std_logic;
+          numMaxAddrPort: in unsigned(7 downto 0);
+          opMaxAddrPort: in unsigned(7 downto 0);
+          ansMaxAddrPort: in unsigned(7 downto 0);
           TxPort: out std_logic;
           TCDonePort: out std_logic);
   end component;
-
+  
   signal clk, ansSend, ASend, BSend, opSend, AEn, BEn, sumEn, multEn, subEn, resetEn, calcEn, newNum, newNumReg, newOpReg, newAnsReg, newReg, TCDone, loadSig, addSig, subSig, multSig, resetSig: std_logic := '0';
   signal A, B, ans, num: signed(15 downto 0) := (others => '0');
   signal op: opType := sum;
@@ -175,8 +183,10 @@ begin
 
   toNum: toNumReg
     port map (clk => clk,
-              numPort => num,
-              newNumPort => newNum,
+              ANumPort => A,
+              newANumPort => ASend,
+              BNumPort => B,
+              newBNumPort => BSend,
               maxAddrPort => numMaxAddr,
               newRegPort => newNumReg,
               regPort => numReg);
@@ -188,8 +198,8 @@ begin
               maxAddrPort => opMaxAddr,
               newRegPort => newOpReg,
               regport => opReg);
-
-    toAns: toAnsReg
+  
+  toAns: toAnsReg
     port map (clk => clk,
               numPort => ans,
               newNumPort => ansSend,
@@ -199,36 +209,51 @@ begin
 
   transmitter: trans
     port map(clk => clk,
-             regPort => reg,
-             newRegPort => newReg,
-             maxAddrPort => maxAddr,
+             numRegPort => numReg,
+             newNumRegPort => newNumReg,
+             opRegPort => opReg,
+             newOpRegPort => newOpReg,
+             ansRegPort => ansReg,
+             newAnsRegPort => newAnsReg,
+             numMaxAddrPort => numMaxAddr,
+             opMaxAddrPort => opMaxAddr,
+             ansMaxAddrPort => ansMaxAddr,
              TxPort => TXExtPort,
              TCDonePort => TCDone);
 
   newNum <= (ASend or BSend);
-  newReg <= (newNumReg or newOpReg or newAnsReg);
+--  newReg <= (newNumReg or newOpReg or newAnsReg);
   
-  updateRegAndAddr: process(newOpReg, newNumReg, newAnsReg, opMaxAddr, numMaxAddr, ansMaxAddr, opReg, numReg, ansReg)
-  begin
-    if newOpReg = '1' then
-      maxAddr <= opMaxAddr;
-      reg <= opReg;
-    elsif newNumReg = '1' then
-      maxAddr <= numMaxAddr;
-      reg <= numReg;
-    elsif newAnsReg  = '1' then
-      maxAddr <= ansMaxAddr;
-      reg <= ansReg;
-    end if;
-  end process;  
+--  updateRegAndAddr: process(clk, newOpReg, newNumReg, newAnsReg, opMaxAddr, numMaxAddr, ansMaxAddr, opReg, numReg, ansReg)
+--  begin
+  --if rising_edge(clk) then
+--    if newOpReg = '1' then
+--      maxAddr <= opMaxAddr;
+--      reg <= opReg;
+--    elsif newNumReg = '1' then
+--      maxAddr <= numMaxAddr;
+--      reg <= numReg;
+--    elsif newAnsReg  = '1' then
+--      maxAddr <= ansMaxAddr;
+--      reg <= ansReg;
+--    else
+--      maxAddr <= (others => '0');
+--      reg <= (others => (others => '0'));
+--    end if;
+   -- end if;
+--  end process;  
 
-  updateNum: process(ASend, BSend, A, B)
-  begin
-    if ASend = '1' then
-      num <= A;
-    elsif BSend = '1' then
-      num <= B;
-    end if; 
-  end process;  
+  --updateNum: process(clk, ASend, BSend, A, B)
+ -- begin
+  --if rising_edge(clk) then
+  --  if ASend = '1' then
+   --   num <= A;
+  --  elsif BSend = '1' then
+   --   num <= B;
+   -- else
+    --  num <= (others => '0');
+   -- end if;
+   -- end if;
+  --end process;  
       
 end structural;

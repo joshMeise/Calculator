@@ -1,0 +1,99 @@
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2021.2 (win64) Build 3367213 Tue Oct 19 02:48:09 MDT 2021
+| Date         : Mon May 27 16:22:46 2024
+| Host         : cadlab-11 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file output_control_sets_placed.rpt
+| Design       : \output 
+| Device       : xc7a35t
+------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    21 |
+|    Minimum number of control sets                        |    21 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    70 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    21 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |    11 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     2 |
+| >= 10 to < 12      |     1 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     2 |
+| >= 16              |     2 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              46 |           25 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |              21 |            7 |
+| Yes          | No                    | No                     |             102 |           29 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |              49 |           18 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-------------------------+-----------------------------+----------------------------+------------------+----------------+--------------+
+|       Clock Signal      |        Enable Signal        |      Set/Reset Signal      | Slice Load Count | Bel Load Count | Bels / Slice |
++-------------------------+-----------------------------+----------------------------+------------------+----------------+--------------+
+|  t/tr/tcBit_reg_i_1_n_0 |                             | t/toOout/newData           |                1 |              1 |         1.00 |
+|  clkExtPort_IBUF_BUFG   |                             |                            |                1 |              1 |         1.00 |
+|  c/CLK                  | n/intData[13]_i_2_n_0       |                            |                3 |              4 |         1.33 |
+|  c/CLK                  | n/intData[13]_i_2_n_0       | n/intData[13]              |                2 |              4 |         2.00 |
+|  c/CLK                  | n/intReg[0][7]_i_2_n_0      | n/intReg[0][7]_i_1_n_0     |                1 |              4 |         4.00 |
+|  c/CLK                  | n/intReg[3][7]_i_2_n_0      | n/intReg[3][7]_i_1_n_0     |                1 |              4 |         4.00 |
+|  c/CLK                  | n/intReg[1][7]_i_2_n_0      | n/intReg[1][7]_i_1_n_0     |                2 |              4 |         2.00 |
+|  c/CLK                  | n/intReg[2][7]_i_2_n_0      | n/intReg[2][7]_i_1_n_0     |                1 |              4 |         4.00 |
+|  c/CLK                  | n/intReg[4][7]_i_2_n_0      | n/intReg[4][7]_i_1_n_0     |                1 |              4 |         4.00 |
+|  c/CLK                  | n/intReg[6][7]_i_2_n_0      | n/intReg[6][7]_i_1_n_0     |                1 |              4 |         4.00 |
+|  c/CLK                  | n/intReg[5][7]_i_2_n_0      | n/intReg[5][7]_i_1_n_0     |                3 |              4 |         1.33 |
+|  c/CLK                  | n/intReg[7][7]_i_2_n_0      | n/intReg[7][7]_i_1_n_0     |                2 |              4 |         2.00 |
+|  c/CLK                  | t/tr/baudCtr_reg[6]_0[0]    | t/toOout/SR[0]             |                1 |              5 |         5.00 |
+|  clkExtPort_IBUF_BUFG   |                             | c/clkDividerCtr[5]_i_1_n_0 |                2 |              6 |         3.00 |
+|  c/CLK                  | t/toOout/E[0]               |                            |                3 |              8 |         2.67 |
+|  c/CLK                  | n/intAddr[7]_i_2_n_0        | n/intAddr_0                |                3 |              8 |         2.67 |
+|  c/CLK                  | n/FSM_onehot_cs[10]_i_1_n_0 |                            |                3 |             11 |         3.67 |
+|  c/CLK                  |                             | t/toOout/E[0]              |                4 |             14 |         3.50 |
+|  c/CLK                  | t/toOout/read               |                            |                7 |             15 |         2.14 |
+|  c/CLK                  |                             |                            |               24 |             45 |         1.88 |
+|  c/CLK                  | t/toOout/load               |                            |               13 |             64 |         4.92 |
++-------------------------+-----------------------------+----------------------------+------------------+----------------+--------------+
+
+
