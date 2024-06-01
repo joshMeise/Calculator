@@ -38,6 +38,7 @@ begin
   end process;
 
   stim: process
+  -- sends over 10001100 into receiver
   begin
     wait for 4000ns;
         Rx <= '1';
@@ -65,7 +66,7 @@ begin
     Rx <= '1';
     wait for 300us;
     
-    -- 2
+    -- 2 sends over 01001100
     Rx <= '0';
     wait for 104us;
     Rx <= '0';
@@ -88,7 +89,7 @@ begin
     Rx <= '1';
     wait for 300us;
     
-    -- 7
+    -- 7 sends over 11101100
     Rx <= '0';
     wait for 104us;
     Rx <= '1';
@@ -111,7 +112,7 @@ begin
     Rx <= '1';
     wait for 300us;
     
-    -- space
+    -- space, sends over 00000100
     Rx <= '0';
     wait for 104us;
     Rx <= '0';
@@ -134,12 +135,12 @@ begin
     Rx <= '1';
     wait for 7000us;
 
-    
+     -- ADD
     sumExtPort <= '1';
     wait for 2000ns;
     sumExtPort <= '0';
     wait for 5000us;
-    -- 2
+    -- 2 send over 01001100 then 00000100
     Rx <= '0';
     wait for 104us;
     Rx <= '0';

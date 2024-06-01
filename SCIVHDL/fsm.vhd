@@ -52,24 +52,24 @@ begin
     ns <= cs;
 
     case cs is
-      when reset =>
+      when reset => 
         resetEnPort <= '1';
         ns <= waitA;
-      when waitA =>
+      when waitA => -- Waits to enable entry A
         if RxDonePort = '1' then
           ns <= acceptA;
         end if;
-      when acceptA =>
+      when acceptA =>  -- takes in A enabler into datapath
         AEnPort <= '1';
         ns <= sendAMp;
-      when sendAMp =>
+      when sendAMp => -- Sends monopulsed A w clock cycle delay
       	ASendPort <= '1';
         ns <= sendA;
       when sendA =>
         if TCDonePort = '1' then
           ns <= waitOp;
         end if;
-      when waitOp =>
+      when waitOp => -- Wait for operation
         if sumPort = '1' then
           ns <= acceptAdd;
         elsif subPort = '1' then
@@ -77,7 +77,7 @@ begin
         elsif multPort = '1' then
           ns <= acceptMult;
         end if;
-      when acceptAdd =>
+      when acceptAdd => -- Determine whether to add, subtract, or multiply
         sumEnPort <= '1';
         ns <= sendOpMp;
       when acceptSub =>
@@ -86,14 +86,14 @@ begin
       when acceptMult =>
         multEnPort <= '1';
         ns <= sendOpMp;
-      when sendOpMp =>
+      when sendOpMp => -- Sends the monopulse signal for the operation
       	opSendPort <= '1';
         ns <= sendOp;
       when sendOp =>
         if TCDonePort = '1' then
           ns <= waitB;
         end if;
-      when waitB =>
+      when waitB => -- Repeat B with logic for A
         if RxDonePort = '1' then
           ns <= acceptB;
         end if;
@@ -107,7 +107,7 @@ begin
         if TCDonePort = '1' then
           ns <= waitCalc;
         end if;
-      when waitCalc =>
+      when waitCalc => -- delay and then enable calculation phase
         ns <= calc;
       when calc =>
         calcEnPort <= '1';
@@ -115,7 +115,7 @@ begin
       when sendCalcMp =>
       	ansSendPort <= '1';
         ns <= sendCalc;
-      when sendCalc =>
+      when sendCalc => -- end calculation phase
         if TCDonePort = '1' then
           ns <= reset;
         end if;

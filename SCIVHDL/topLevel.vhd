@@ -5,6 +5,7 @@ use IEEE.numeric_std.all;
 library work;
 use work.myPackage.all;
 
+-- Declare Entity
 entity calculator is
   port (clkExtPort: in std_logic;
         sumExtPort: in std_logic;
@@ -14,18 +15,21 @@ entity calculator is
         TxExtPort: out std_logic);
 end calculator;
         
+-- Declare Architecture
 architecture structural of calculator is
   component clockGenerator is
     port (clkExtPort: in std_logic;
           clkPort: out std_logic);
   end component;
 
+-- Entering Buttons
   component buttonInterface is
     port(clk: in  std_logic;
          buttonPort: in  std_logic;
          buttonMpPort: out std_logic);
   end component;
 
+-- Receiver
   component receiver is
     port (clk: in std_logic;
           RxPort: in std_logic;
@@ -69,6 +73,7 @@ architecture structural of calculator is
           opPort: out opType);
   end component;
   
+-- takes in number, converts to ascii, puts into queue
   component toNumReg is
     port (clk: in std_logic;
           ANumPort: in signed(15 downto 0);
@@ -80,6 +85,7 @@ architecture structural of calculator is
           regPort: out regType);
   end component;
 
+-- Converts numerical answer and transmits in ASCII
   component toAnsReg is
     port (clk: in std_logic;
           numPort: in signed(15 downto 0);
@@ -89,6 +95,7 @@ architecture structural of calculator is
           regPort: out regType);
   end component;
 
+-- Takes in current operation and converts to ascii and transmits
   component toOpReg is
     port (clk: in std_logic;
           opPort: in opType;
@@ -98,6 +105,7 @@ architecture structural of calculator is
           regPort: out regType);
   end component;
 
+-- Transmitter
   component trans is
     port (clk: in std_logic;
           numRegPort: in regType;
@@ -220,40 +228,5 @@ begin
              ansMaxAddrPort => ansMaxAddr,
              TxPort => TXExtPort,
              TCDonePort => TCDone);
-
---  newNum <= (ASend or BSend);
---  newReg <= (newNumReg or newOpReg or newAnsReg);
-  
---  updateRegAndAddr: process(clk, newOpReg, newNumReg, newAnsReg, opMaxAddr, numMaxAddr, ansMaxAddr, opReg, numReg, ansReg)
---  begin
-  --if rising_edge(clk) then
---    if newOpReg = '1' then
---      maxAddr <= opMaxAddr;
---      reg <= opReg;
---    elsif newNumReg = '1' then
---      maxAddr <= numMaxAddr;
---      reg <= numReg;
---    elsif newAnsReg  = '1' then
---      maxAddr <= ansMaxAddr;
---      reg <= ansReg;
---    else
---      maxAddr <= (others => '0');
---      reg <= (others => (others => '0'));
---    end if;
-   -- end if;
---  end process;  
-
-  --updateNum: process(clk, ASend, BSend, A, B)
- -- begin
-  --if rising_edge(clk) then
-  --  if ASend = '1' then
-   --   num <= A;
-  --  elsif BSend = '1' then
-   --   num <= B;
-   -- else
-    --  num <= (others => '0');
-   -- end if;
-   -- end if;
-  --end process;  
       
 end structural;

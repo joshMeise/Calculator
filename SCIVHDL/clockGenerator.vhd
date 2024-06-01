@@ -21,6 +21,7 @@ architecture behavioral of clockGenerator is
 begin
   clockDivider: process(clkExtPort)
   begin
+  -- Slow down 100 times to 1 MHz
     if rising_edge(clkExtPort) then
       if clkDividerCtr = clkDividerTC - 1 then
         clkTog <= not(clkTog);

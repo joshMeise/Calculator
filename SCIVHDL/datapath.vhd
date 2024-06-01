@@ -21,6 +21,8 @@ entity datapath is
         opPort: out opType);
 end datapath;
 
+-- Performs all the operations
+
 architecture behavioral of datapath is
   signal op: opType := sum;
 
