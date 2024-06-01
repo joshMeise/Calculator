@@ -1,0 +1,18 @@
+0.7
+2020.2
+Oct 19 2021
+03:16:22
+O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd,1717166177,vhdl,,,,buttoninterface,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/calculator_tb.vhd,1717173547,vhdl,,,,calculator_tb,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/clockGenerator.vhd,1717159241,vhdl,,,,clockgenerator,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/datapath.vhd,1717166558,vhdl,,,,datapath,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/fsm.vhd,1717166494,vhdl,,,,fsm,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/myPackage.vhd,1717159241,vhdl,O:/ENGS31/Proj/SCIVHDL/calculator_tb.vhd,,,mypackage,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/receiver.vhd,1717170440,vhdl,,,,receiver,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/toAnsReg.vhd,1717159241,vhdl,,,,toansreg,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/toNumReg.vhd,1717159241,vhdl,,,,tonumreg,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/toOpReg.vhd,1717159241,vhdl,,,,toopreg,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/toOutput.vhd,1717159241,vhdl,,,,tooutput,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/topLevel.vhd,1717167048,vhdl,,,,calculator,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/trans.vhd,1717159241,vhdl,,,,trans,,,,,,,,
+O:/ENGS31/Proj/SCIVHDL/transmitter.vhd,1717159241,vhdl,,,,transmitter,,,,,,,,

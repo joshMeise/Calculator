@@ -1,0 +1,19 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../SCIVHDL/buttonInterface.vhd" \
+"../../../../../SCIVHDL/myPackage.vhd" \
+"../../../../../SCIVHDL/clockGenerator.vhd" \
+"../../../../../SCIVHDL/datapath.vhd" \
+"../../../../../SCIVHDL/fsm.vhd" \
+"../../../../../SCIVHDL/receiver.vhd" \
+"../../../../../SCIVHDL/toAnsReg.vhd" \
+"../../../../../SCIVHDL/toNumReg.vhd" \
+"../../../../../SCIVHDL/toOpReg.vhd" \
+"../../../../../SCIVHDL/toOutput.vhd" \
+"../../../../../SCIVHDL/topLevel.vhd" \
+"../../../../../SCIVHDL/trans.vhd" \
+"../../../../../SCIVHDL/transmitter.vhd" \
+"../../../../../SCIVHDL/calculator_tb.vhd" \
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,439 @@
+#-----------------------------------------------------------
+# Vivado v2021.2 (64-bit)
+# SW Build 3367213 on Tue Oct 19 02:48:09 MDT 2021
+# IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
+# Start of session at: Fri May 31 11:49:05 2024
+# Process ID: 29760
+# Current directory: O:/ENGS31/Proj/WithSCI/WithSCI.runs/synth_1
+# Command line: vivado.exe -log calculator.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source calculator.tcl
+# Log file: O:/ENGS31/Proj/WithSCI/WithSCI.runs/synth_1/calculator.vds
+# Journal file: O:/ENGS31/Proj/WithSCI/WithSCI.runs/synth_1\vivado.jou
+# Running On: cadlab-04, OS: Windows, CPU Frequency: 2419 MHz, CPU Physical cores: 16, Host memory: 33979 MB
+#-----------------------------------------------------------
+source calculator.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental O:/ENGS31/Proj/WithSCI/WithSCI.srcs/utils_1/imports/synth_1/calculator.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from O:/ENGS31/Proj/WithSCI/WithSCI.srcs/utils_1/imports/synth_1/calculator.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top calculator -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+WARNING: [Designutils 20-4072] Reference run did not run incremental synthesis because the design is too small; reverting to default synthesis
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 50732
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'calculator' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:17]
+INFO: [Synth 8-3491] module 'clockGenerator' declared at 'O:/ENGS31/Proj/SCIVHDL/clockGenerator.vhd:9' bound to instance 'clkGen' of component 'clockGenerator' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:125]
+INFO: [Synth 8-638] synthesizing module 'clockGenerator' [O:/ENGS31/Proj/SCIVHDL/clockGenerator.vhd:14]
+INFO: [Synth 8-113] binding component instance 'clkBuffer' to cell 'BUFG' [O:/ENGS31/Proj/SCIVHDL/clockGenerator.vhd:34]
+INFO: [Synth 8-256] done synthesizing module 'clockGenerator' (1#1) [O:/ENGS31/Proj/SCIVHDL/clockGenerator.vhd:14]
+INFO: [Synth 8-3491] module 'buttonInterface' declared at 'O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd:9' bound to instance 'addBtn' of component 'buttonInterface' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:129]
+INFO: [Synth 8-638] synthesizing module 'buttonInterface' [O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd:15]
+INFO: [Synth 8-226] default block is never used [O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd:53]
+WARNING: [Synth 8-6014] Unused sequential element synchronizer_reg was removed.  [O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd:34]
+WARNING: [Synth 8-6014] Unused sequential element cs_reg was removed.  [O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd:42]
+WARNING: [Synth 8-6014] Unused sequential element counter_reg was removed.  [O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd:87]
+INFO: [Synth 8-256] done synthesizing module 'buttonInterface' (2#1) [O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd:15]
+INFO: [Synth 8-3491] module 'buttonInterface' declared at 'O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd:9' bound to instance 'subBtn' of component 'buttonInterface' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:134]
+INFO: [Synth 8-3491] module 'buttonInterface' declared at 'O:/ENGS31/Proj/SCIVHDL/buttonInterface.vhd:9' bound to instance 'multBtn' of component 'buttonInterface' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:139]
+INFO: [Synth 8-3491] module 'receiver' declared at 'O:/ENGS31/Proj/SCIVHDL/receiver.vhd:6' bound to instance 'rec' of component 'receiver' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:144]
+INFO: [Synth 8-638] synthesizing module 'receiver' [O:/ENGS31/Proj/SCIVHDL/receiver.vhd:13]
+WARNING: [Synth 8-614] signal 'readAddr' is read in the process but is not in the sensitivity list [O:/ENGS31/Proj/SCIVHDL/receiver.vhd:108]
+WARNING: [Synth 8-614] signal 'numAddr' is read in the process but is not in the sensitivity list [O:/ENGS31/Proj/SCIVHDL/receiver.vhd:108]
+WARNING: [Synth 8-6014] Unused sequential element datapath.add_reg was removed.  [O:/ENGS31/Proj/SCIVHDL/receiver.vhd:154]
+INFO: [Synth 8-256] done synthesizing module 'receiver' (3#1) [O:/ENGS31/Proj/SCIVHDL/receiver.vhd:13]
+INFO: [Synth 8-3491] module 'fsm' declared at 'O:/ENGS31/Proj/SCIVHDL/fsm.vhd:5' bound to instance 'controller' of component 'fsm' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:150]
+INFO: [Synth 8-638] synthesizing module 'fsm' [O:/ENGS31/Proj/SCIVHDL/fsm.vhd:25]
+INFO: [Synth 8-256] done synthesizing module 'fsm' (4#1) [O:/ENGS31/Proj/SCIVHDL/fsm.vhd:25]
+INFO: [Synth 8-3491] module 'datapath' declared at 'O:/ENGS31/Proj/SCIVHDL/datapath.vhd:8' bound to instance 'path' of component 'datapath' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:169]
+INFO: [Synth 8-638] synthesizing module 'datapath' [O:/ENGS31/Proj/SCIVHDL/datapath.vhd:24]
+INFO: [Synth 8-256] done synthesizing module 'datapath' (5#1) [O:/ENGS31/Proj/SCIVHDL/datapath.vhd:24]
+INFO: [Synth 8-3491] module 'toNumReg' declared at 'O:/ENGS31/Proj/SCIVHDL/toNumReg.vhd:10' bound to instance 'toNum' of component 'toNumReg' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:184]
+INFO: [Synth 8-638] synthesizing module 'toNumReg' [O:/ENGS31/Proj/SCIVHDL/toNumReg.vhd:21]
+INFO: [Synth 8-256] done synthesizing module 'toNumReg' (6#1) [O:/ENGS31/Proj/SCIVHDL/toNumReg.vhd:21]
+INFO: [Synth 8-3491] module 'toOpReg' declared at 'O:/ENGS31/Proj/SCIVHDL/toOpReg.vhd:8' bound to instance 'toOp' of component 'toOpReg' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:194]
+INFO: [Synth 8-638] synthesizing module 'toOpReg' [O:/ENGS31/Proj/SCIVHDL/toOpReg.vhd:17]
+INFO: [Synth 8-256] done synthesizing module 'toOpReg' (7#1) [O:/ENGS31/Proj/SCIVHDL/toOpReg.vhd:17]
+INFO: [Synth 8-3491] module 'toAnsReg' declared at 'O:/ENGS31/Proj/SCIVHDL/toAnsReg.vhd:20' bound to instance 'toAns' of component 'toAnsReg' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:202]
+INFO: [Synth 8-638] synthesizing module 'toAnsReg' [O:/ENGS31/Proj/SCIVHDL/toAnsReg.vhd:30]
+INFO: [Synth 8-256] done synthesizing module 'toAnsReg' (8#1) [O:/ENGS31/Proj/SCIVHDL/toAnsReg.vhd:30]
+INFO: [Synth 8-3491] module 'trans' declared at 'O:/ENGS31/Proj/SCIVHDL/trans.vhd:8' bound to instance 'transmitter' of component 'trans' [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:210]
+INFO: [Synth 8-638] synthesizing module 'trans' [O:/ENGS31/Proj/SCIVHDL/trans.vhd:23]
+INFO: [Synth 8-3491] module 'toOutput' declared at 'O:/ENGS31/Proj/SCIVHDL/toOutput.vhd:10' bound to instance 'toOout' of component 'toOutput' [O:/ENGS31/Proj/SCIVHDL/trans.vhd:55]
+INFO: [Synth 8-638] synthesizing module 'toOutput' [O:/ENGS31/Proj/SCIVHDL/toOutput.vhd:27]
+INFO: [Synth 8-256] done synthesizing module 'toOutput' (9#1) [O:/ENGS31/Proj/SCIVHDL/toOutput.vhd:27]
+INFO: [Synth 8-3491] module 'transmitter' declared at 'O:/ENGS31/Proj/SCIVHDL/transmitter.vhd:10' bound to instance 'tr' of component 'transmitter' [O:/ENGS31/Proj/SCIVHDL/trans.vhd:71]
+INFO: [Synth 8-638] synthesizing module 'transmitter' [O:/ENGS31/Proj/SCIVHDL/transmitter.vhd:18]
+INFO: [Synth 8-256] done synthesizing module 'transmitter' (10#1) [O:/ENGS31/Proj/SCIVHDL/transmitter.vhd:18]
+INFO: [Synth 8-256] done synthesizing module 'trans' (11#1) [O:/ENGS31/Proj/SCIVHDL/trans.vhd:23]
+INFO: [Synth 8-256] done synthesizing module 'calculator' (12#1) [O:/ENGS31/Proj/SCIVHDL/topLevel.vhd:17]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 1238.746 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [O:/ENGS31/Proj/SCIVHDL/constraints.xdc]
+Finished Parsing XDC File [O:/ENGS31/Proj/SCIVHDL/constraints.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [O:/ENGS31/Proj/SCIVHDL/constraints.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/calculator_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/calculator_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1238.746 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1238.746 ; gain = 0.000
+WARNING: [Designutils 20-4072] Reference run did not run incremental synthesis because the design is too small; reverting to default synthesis
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:11 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:11 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:08 ; elapsed = 00:00:11 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'cs_reg' in module 'receiver'
+INFO: [Synth 8-802] inferred FSM for state register 'cs_reg' in module 'fsm'
+INFO: [Synth 8-802] inferred FSM for state register 'cs_reg' in module 'toNumReg'
+INFO: [Synth 8-802] inferred FSM for state register 'cs_reg' in module 'toOpReg'
+INFO: [Synth 8-802] inferred FSM for state register 'cs_reg' in module 'toAnsReg'
+INFO: [Synth 8-802] inferred FSM for state register 'cs_reg' in module 'toOutput'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   reset |                         00000001 |                             0000
+                    idle |                         00000010 |                             0001
+              waitforbit |                         00000100 |                             0010
+              receivebit |                         00001000 |                             0011
+              loadnumreg |                         00010000 |                             0100
+            converttonum |                         00100000 |                             0101
+          negativeinsert |                         01000000 |                             0111
+                  output |                         10000000 |                             1000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'cs_reg' using encoding 'one-hot' in module 'receiver'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   reset |                            00000 |                            00000
+                   waita |                            00001 |                            00001
+                 accepta |                            00010 |                            00010
+                 sendamp |                            00011 |                            00011
+                   senda |                            00100 |                            00100
+                  waitop |                            00101 |                            00101
+               acceptadd |                            00110 |                            00110
+               acceptsub |                            00111 |                            00111
+              acceptmult |                            01000 |                            01000
+                sendopmp |                            01001 |                            01001
+                  sendop |                            01010 |                            01010
+                   waitb |                            01011 |                            01011
+                 acceptb |                            01100 |                            01100
+                 sendbmp |                            01101 |                            01101
+                   sendb |                            01110 |                            01110
+                waitcalc |                            01111 |                            01111
+                    calc |                            10000 |                            10000
+              sendcalcmp |                            10001 |                            10001
+                sendcalc |                            10010 |                            10010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'cs_reg' using encoding 'sequential' in module 'fsm'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |                     000000000001 |                             0001
+                  latcha |                     000000000010 |                             0010
+                  latchb |                     000000000100 |                             0011
+                checkneg |                     000000001000 |                             0101
+                 gotoneg |                     000000010000 |                             0110
+                writeneg |                     000000100000 |                             0111
+                countdig |                     000001000000 |                             0100
+                    conv |                     000010000000 |                             1000
+               writeconv |                     000100000000 |                             1001
+                addspace |                     001000000000 |                             1010
+                    send |                     010000000000 |                             1011
+                   reset |                     100000000000 |                             0000
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'cs_reg' using encoding 'one-hot' in module 'toNumReg'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |                              001 |                               00
+                 fillreg |                              010 |                               01
+                    send |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'cs_reg' using encoding 'one-hot' in module 'toOpReg'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   reset |                      00000000001 |                             0000
+                    idle |                      00000000010 |                             0001
+                   addeq |                      00000000100 |                             0010
+                countdig |                      00000001000 |                             0011
+                checkneg |                      00000010000 |                             0100
+                 gotoneg |                      00000100000 |                             0101
+                writeneg |                      00001000000 |                             0110
+                    conv |                      00010000000 |                             0111
+               writeconv |                      00100000000 |                             1000
+              addnewline |                      01000000000 |                             1001
+                    send |                      10000000000 |                             1010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'cs_reg' using encoding 'one-hot' in module 'toAnsReg'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |                        000000001 |                             0001
+                 loadnum |                        000000010 |                             0010
+                  loadop |                        000000100 |                             0011
+                 loadans |                        000001000 |                             0100
+                loaddata |                        000010000 |                             0101
+              waittosend |                        000100000 |                             0110
+               sendtosci |                        001000000 |                             0111
+                 sending |                        010000000 |                             1000
+                    done |                        100000000 |                             1001
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'cs_reg' using encoding 'one-hot' in module 'toOutput'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:13 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   17 Bit       Adders := 1     
+	   2 Input   16 Bit       Adders := 3     
+	   3 Input   16 Bit       Adders := 1     
+	   2 Input    8 Bit       Adders := 5     
+	   2 Input    6 Bit       Adders := 2     
+	   2 Input    5 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 3     
+	   2 Input    3 Bit       Adders := 2     
++---Registers : 
+	               16 Bit    Registers := 7     
+	               10 Bit    Registers := 1     
+	                8 Bit    Registers := 47    
+	                6 Bit    Registers := 2     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 4     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 7     
++---Muxes : 
+	   2 Input   17 Bit        Muxes := 1     
+	   2 Input   16 Bit        Muxes := 9     
+	   6 Input   16 Bit        Muxes := 2     
+	  12 Input   12 Bit        Muxes := 1     
+	   2 Input   12 Bit        Muxes := 3     
+	  11 Input   11 Bit        Muxes := 1     
+	   2 Input   11 Bit        Muxes := 2     
+	   2 Input   10 Bit        Muxes := 1     
+	   9 Input    9 Bit        Muxes := 1     
+	   2 Input    9 Bit        Muxes := 3     
+	   8 Input    8 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 56    
+	  12 Input    8 Bit        Muxes := 1     
+	   6 Input    8 Bit        Muxes := 1     
+	   4 Input    8 Bit        Muxes := 8     
+	   3 Input    7 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 19    
+	  19 Input    5 Bit        Muxes := 1     
+	   2 Input    5 Bit        Muxes := 3     
+	   8 Input    4 Bit        Muxes := 1     
+	   3 Input    4 Bit        Muxes := 2     
+	   6 Input    3 Bit        Muxes := 2     
+	   3 Input    3 Bit        Muxes := 8     
+	   9 Input    2 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 1     
+	   5 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 120   
+	   4 Input    1 Bit        Muxes := 3     
+	   8 Input    1 Bit        Muxes := 1     
+	  12 Input    1 Bit        Muxes := 4     
+	  19 Input    1 Bit        Muxes := 12    
+	   5 Input    1 Bit        Muxes := 2     
+	   6 Input    1 Bit        Muxes := 2     
+	   3 Input    1 Bit        Muxes := 1     
+	  11 Input    1 Bit        Muxes := 1     
+	   9 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP path/ARG, operation Mode is: A2*B2.
+DSP Report: register path/B_reg is absorbed into DSP path/ARG.
+DSP Report: register path/A_reg is absorbed into DSP path/ARG.
+DSP Report: operator path/ARG is absorbed into DSP path/ARG.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:22 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|datapath    | A2*B2       | 16     | 16     | -      | -      | 32     | 1    | 1    | -    | -    | -     | 0    | 0    | 
++------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:27 . Memory (MB): peak = 1238.746 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:27 . Memory (MB): peak = 1242.469 ; gain = 3.723
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:21 ; elapsed = 00:00:28 . Memory (MB): peak = 1282.562 ; gain = 43.816
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 1297.395 ; gain = 58.648
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 1297.395 ; gain = 58.648
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 1297.395 ; gain = 58.648
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 1297.395 ; gain = 58.648
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 1297.395 ; gain = 58.648
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 1297.395 ; gain = 58.648
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |BUFG    |     2|
+|2     |CARRY4  |   193|
+|3     |DSP48E1 |     1|
+|4     |LUT1    |   125|
+|5     |LUT2    |   448|
+|6     |LUT3    |   194|
+|7     |LUT4    |   287|
+|8     |LUT5    |   205|
+|9     |LUT6    |   447|
+|10    |MUXF7   |     8|
+|11    |FDRE    |   495|
+|12    |FDSE    |     8|
+|13    |IBUF    |     5|
+|14    |OBUF    |     1|
++------+--------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 1297.395 ; gain = 58.648
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:29 . Memory (MB): peak = 1297.395 ; gain = 58.648
+Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:30 . Memory (MB): peak = 1297.395 ; gain = 58.648
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.019 . Memory (MB): peak = 1297.395 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 202 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1313.125 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 2bfbac67
+INFO: [Common 17-83] Releasing license: Synthesis
+70 Infos, 9 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:35 . Memory (MB): peak = 1313.125 ; gain = 74.379
+INFO: [Common 17-1381] The checkpoint 'O:/ENGS31/Proj/WithSCI/WithSCI.runs/synth_1/calculator.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file calculator_utilization_synth.rpt -pb calculator_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri May 31 11:49:46 2024...
