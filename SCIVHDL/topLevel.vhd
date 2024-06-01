@@ -220,40 +220,4 @@ begin
              ansMaxAddrPort => ansMaxAddr,
              TxPort => TXExtPort,
              TCDonePort => TCDone);
-
---  newNum <= (ASend or BSend);
---  newReg <= (newNumReg or newOpReg or newAnsReg);
-  
---  updateRegAndAddr: process(clk, newOpReg, newNumReg, newAnsReg, opMaxAddr, numMaxAddr, ansMaxAddr, opReg, numReg, ansReg)
---  begin
-  --if rising_edge(clk) then
---    if newOpReg = '1' then
---      maxAddr <= opMaxAddr;
---      reg <= opReg;
---    elsif newNumReg = '1' then
---      maxAddr <= numMaxAddr;
---      reg <= numReg;
---    elsif newAnsReg  = '1' then
---      maxAddr <= ansMaxAddr;
---      reg <= ansReg;
---    else
---      maxAddr <= (others => '0');
---      reg <= (others => (others => '0'));
---    end if;
-   -- end if;
---  end process;  
-
-  --updateNum: process(clk, ASend, BSend, A, B)
- -- begin
-  --if rising_edge(clk) then
-  --  if ASend = '1' then
-   --   num <= A;
-  --  elsif BSend = '1' then
-   --   num <= B;
-   -- else
-    --  num <= (others => '0');
-   -- end if;
-   -- end if;
-  --end process;  
-      
 end structural;
