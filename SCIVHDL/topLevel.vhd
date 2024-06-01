@@ -228,5 +228,8 @@ begin
              ansMaxAddrPort => ansMaxAddr,
              TxPort => TXExtPort,
              TCDonePort => TCDone);
+<<<<<<< HEAD
       
+=======
+>>>>>>> c6e60b242b9ce03a6c2e28249628b9935336c8c7
 end structural;
