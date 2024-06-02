@@ -30,6 +30,7 @@ architecture behavioral of receiver is
   signal neg, insNeg: std_logic := '0';
   
 begin
+--------FSM----------
 	stateUpdate: process(clk)
   begin
     if rising_edge(clk) then
@@ -105,6 +106,7 @@ begin
     end case;
   end process;
   
+----------Datapath-------------
   datapath: process(clk, bitCtr, baudCtr, intData)
     variable num: signed(7 downto 0) := (others => '0');
     variable add: std_logic := '1';

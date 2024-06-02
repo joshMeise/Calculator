@@ -22,6 +22,8 @@ architecture behavioral of toOpReg is
   signal intMaxAddr: unsigned (7 downto 0) := (others => '0');
   signal intNewReg, regFill: std_logic := '0';
 begin
+
+---------FSM-----------
   stateUpdate: process(clk)
   begin
     if rising_edge(clk) then
@@ -52,6 +54,7 @@ begin
     end case;
   end process;
 
+------------Datapath-------------
   datapath: process(clk)
   begin
     if rising_edge(clk) then

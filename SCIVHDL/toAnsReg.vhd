@@ -31,7 +31,7 @@ architecture behavioral of toAnsReg is
   -- User-defined states.
 	type state is (reset, idle, addEq, countDig, checkNeg, goToNeg, writeNeg, conv, writeConv, addNewline, send);
 
-  -- INternal and control signals.
+  -- Internal and control signals.
   signal cs, ns: state := reset;
 	signal intAddr: unsigned(7 downto 0) := (others => '0');
   signal intData: unsigned(15 downto 0) := (others => '0');

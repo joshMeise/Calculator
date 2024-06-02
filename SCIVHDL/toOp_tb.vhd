@@ -40,6 +40,7 @@ begin
     
   end process;
   
+  -- try to load in sum
   stim: process
   begin
     opPort <= sum;

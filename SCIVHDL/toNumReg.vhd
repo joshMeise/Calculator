@@ -34,6 +34,7 @@ architecture behavioral of toNumReg is
   signal intNum: signed(15 downto 0) := (others => '0');
 begin
 
+-----------FSM--------------
 	stateUpdate: process(clk)
   begin
     if rising_edge(clk) then
@@ -110,6 +111,7 @@ begin
     end case;
   end process;
   
+-------------DATAPATH------------
 	datapath: process(clk, numDig, dig)
   begin
     if rising_edge(clk) then

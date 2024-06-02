@@ -22,6 +22,8 @@ architecture behavioral of transmitter is
     signal intData: std_logic_vector(9 downto 0) := (others => '1');
     signal intDone: std_logic := '0';
 begin
+
+-- Build a baudcounter to transmit data
 	datapath: process(clk, baudCtr, bitCtr, newData)
     begin
     	if rising_edge(clk) then
