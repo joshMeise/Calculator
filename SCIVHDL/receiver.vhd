@@ -25,13 +25,13 @@ architecture behavioral of receiver is
   type numRegFile is array(0 to 10) of std_logic_vector(7 downto 0);
  
 	-- Define internal signals and counters.
-	signal TCbaud, TCbit, bitClr, baudClr, shiftEn, dataEnd, writeReg, resetReg, numRegReset, writeNumReg, numEnd, convert, readAddrReset, read, readDone: std_logic := '0';
+  signal cs, ns: state := reset;
+	signal TCbaud, TCbit, bitClr, baudClr, shiftEn, writeReg, resetReg, writeNumReg, numEnd, convert, read, readDone: std_logic := '0';
   signal bitCtr: unsigned(3 downto 0) := (others => '0');
   signal baudCtr: unsigned(13 downto 0) := (others => '0');
   signal numAddr: unsigned(3 downto 0) := (others => '0');
-  signal readAddr: unsigned(5 downto 0) := (others => '0');
+  signal readAddr: unsigned(3 downto 0) := (others => '0');
   signal intData: std_logic_vector(7 downto 0) := (others => '0');
-  signal cs, ns: state := reset;
   signal dig: std_logic_vector(7 downto 0) := (others => '0');
   signal numReg: numRegFile := (others => (others => '0'));
   signal number: signed(7 downto 0) := (others => '0');
@@ -47,7 +47,7 @@ begin
   end process;
 
   -- Next state and output logic.
-  combinational: process(cs, TCbaud, TCbit, RxPort, dataEnd, numEnd, readDone)
+  combinational: process(cs, TCbaud, TCbit, RxPort, numEnd, readDone)
   begin
     -- Defaults
     ns <= cs;
@@ -56,10 +56,8 @@ begin
     bitClr <= '0';
     resetReg <= '0';
     writeReg <= '0';
-    numRegReset <= '0';
     writeNumReg <= '0';
     convert <= '0';
-    readAddrReset <= '0';
     read <= '0';
     RxDonePort <= '0';
     insNeg <= '0';
@@ -99,7 +97,6 @@ begin
       -- the number has not yet been reached.
       when loadNumReg =>
         writeNumReg <= '1';
-        readAddrReset <= '1';
         if numEnd = '1' then
           ns <= convertToNum;
         else
