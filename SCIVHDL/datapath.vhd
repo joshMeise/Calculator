@@ -1,10 +1,18 @@
+--
+--datapath.vhd --- datapath for calculator
+--
+--Author: Joshua Meise and Brandon Zhao
+--Created: 05-28-2024
+--
+
+-- Library inclusions.
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-
 library work;
 use work.myPackage.all;
 
+-- Entity definition.
 entity datapath is
   port (clk: in std_logic;
         AEnPort: in std_logic;
@@ -21,28 +29,27 @@ entity datapath is
         opPort: out opType);
 end datapath;
 
--- Performs all the operations
-
+-- Architecture definitions.
 architecture behavioral of datapath is
-  signal op: opType := sum;
-
   -- Registers.
+  signal op: opType := sum;
   signal A: signed(15 downto 0) := (others => '0');
   signal B: signed(15 downto 0) := (others => '0');
   signal intAns: signed(15 downto 0) := (others => '0');
 
 begin
+  -- All register updates are synchronous.
   process(clk)
   begin
     if rising_edge(clk) then
-      -- A register.
+      -- Register for first term.
       if AEnPort = '1' then
         A <= resize(numPort, 16);
       elsif resetEnPort = '1' then
         A <= (others => '0');
       end if;
 
-      -- B register.
+      -- Register for second term.
       if BEnPort = '1' then
         B <= resize(numPort, 16);
       elsif resetEnPort = '1' then
@@ -73,6 +80,7 @@ begin
     end if; 
   end process;
 
+  -- Tie internal signals to external ports.
   ansPort <= intAns;
   APort <= A;
   BPort <= B;
