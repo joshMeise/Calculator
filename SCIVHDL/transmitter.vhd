@@ -1,8 +1,7 @@
 --
 --transmitter.vhd --- SCI transmitter
 --
---Author: Joshua Meise and brandon Zhao
---Created: 05-27-2024
+--Author: Joshua Meise and Brandon Zhao
 --
 
 -- Library inclusions.
@@ -12,11 +11,11 @@ use IEEE.numeric_std.all;
 
 -- Entity definition.
 entity transmitter is
-port (clk: in std_logic;
-      ddata: in std_logic_vector(7 downto 0);
-      newData: in std_logic;
-      Tx: out std_logic;
-      TxReady: out std_logic);
+  port (clk: in std_logic;
+        data: in std_logic_vector(7 downto 0);
+        newData: in std_logic;
+        Tx: out std_logic;
+        TxReady: out std_logic);
 end transmitter;
 
 -- Architecture definition.
