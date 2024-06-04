@@ -1,7 +1,7 @@
 Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2021.2 (win64) Build 3367213 Tue Oct 19 02:48:09 MDT 2021
-| Date             : Fri May 31 11:50:34 2024
+| Date             : Tue Jun  4 16:03:55 2024
 | Host             : cadlab-04 running 64-bit major release  (build 9200)
 | Command          : report_power -file calculator_power_routed.rpt -pb calculator_power_summary_routed.pb -rpx calculator_power_routed.rpx
 | Design           : calculator
@@ -33,7 +33,7 @@ Table of Contents
 | Total On-Chip Power (W)  | 0.083        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.012        |
+| Dynamic (W)              | 0.011        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.6         |
@@ -53,14 +53,14 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |     0.006 |     2437 |       --- |             --- |
-|   LUT as Logic |     0.006 |     1385 |     20800 |            6.66 |
+| Slice Logic    |     0.006 |     2542 |       --- |             --- |
+|   LUT as Logic |     0.005 |     1465 |     20800 |            7.04 |
 |   CARRY4       |    <0.001 |      193 |      8150 |            2.37 |
-|   Register     |    <0.001 |      503 |     41600 |            1.21 |
+|   Register     |    <0.001 |      538 |     41600 |            1.29 |
 |   BUFG         |    <0.001 |        1 |        32 |            3.13 |
-|   F7/F8 Muxes  |    <0.001 |        8 |     32600 |            0.02 |
+|   F7/F8 Muxes  |    <0.001 |        2 |     32600 |           <0.01 |
 |   Others       |     0.000 |       26 |       --- |             --- |
-| Signals        |     0.005 |     1748 |       --- |             --- |
+| Signals        |     0.004 |     1833 |       --- |             --- |
 | DSPs           |     0.000 |        1 |        90 |            1.11 |
 | I/O            |    <0.001 |        6 |       106 |            5.66 |
 | Static Power   |     0.072 |          |           |                 |
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.021 |       0.012 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.020 |       0.011 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -143,8 +143,8 @@ Table of Contents
 +------------+-----------+
 | Name       | Power (W) |
 +------------+-----------+
-| calculator |     0.012 |
-|   toAns    |     0.004 |
+| calculator |     0.011 |
+|   toAns    |     0.005 |
 |   toNum    |     0.004 |
 +------------+-----------+
 

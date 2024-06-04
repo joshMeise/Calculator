@@ -126,7 +126,7 @@ begin
   end process;
   
   -- Datapath.
-  datapath: process(clk, bitCtr, baudCtr, intData)
+  datapath: process(clk, bitCtr, baudCtr, intData, readAddr, numAddr)
     -- Instantiate variables for values that may need to be updated and used
     -- within the same clock cycle.
     variable num: signed(7 downto 0) := (others => '0');

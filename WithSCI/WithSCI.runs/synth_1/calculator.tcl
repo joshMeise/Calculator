@@ -70,6 +70,7 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 6
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -97,7 +98,6 @@ read_vhdl -library xil_defaultlib {
   O:/ENGS31/Proj/SCIVHDL/toNumReg.vhd
   O:/ENGS31/Proj/SCIVHDL/toOpReg.vhd
   O:/ENGS31/Proj/SCIVHDL/toOutput.vhd
-  O:/ENGS31/Proj/SCIVHDL/trans.vhd
   O:/ENGS31/Proj/SCIVHDL/transmitter.vhd
   O:/ENGS31/Proj/SCIVHDL/topLevel.vhd
 }
