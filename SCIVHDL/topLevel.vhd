@@ -1,11 +1,18 @@
+--
+--topLevel.vhd --- top level for calculator
+--
+--Author: Joshua Meise and Brandon Zhao
+--Created: 05-29-2024
+--
+
+-- Library inclusions.
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-
 library work;
 use work.myPackage.all;
 
--- Declare Entity
+-- Entity definition.
 entity calculator is
   port (clkExtPort: in std_logic;
         sumExtPort: in std_logic;
@@ -15,28 +22,30 @@ entity calculator is
         TxExtPort: out std_logic);
 end calculator;
         
--- Declare Architecture
+-- Architecture definition.
 architecture structural of calculator is
+  -- Clock divider.
   component clockGenerator is
     port (clkExtPort: in std_logic;
           clkPort: out std_logic);
   end component;
 
--- Entering Buttons
+  -- Button interfacing (monopulser).
   component buttonInterface is
     port(clk: in  std_logic;
          buttonPort: in  std_logic;
          buttonMpPort: out std_logic);
   end component;
 
--- Receiver
+  -- Receiver.
   component receiver is
     port (clk: in std_logic;
           RxPort: in std_logic;
           numPort: out signed(7 downto 0);
           RxDonePort: out std_logic);
   end component;
-  
+
+  -- Controller.
   component fsm is
     port (clk: in std_logic;
           sumPort: in std_logic;
@@ -57,6 +66,7 @@ architecture structural of calculator is
           ansSendPort: out std_logic);
   end component;
 
+  -- Datapath.
   component datapath is
     port (clk: in std_logic;
           AEnPort: in std_logic;
@@ -73,7 +83,7 @@ architecture structural of calculator is
           opPort: out opType);
   end component;
   
--- takes in number, converts to ascii, puts into queue
+  -- Takes in number and converts to BCD ASCII and inserts into FIFO.
   component toNumReg is
     port (clk: in std_logic;
           ANumPort: in signed(15 downto 0);
@@ -85,7 +95,8 @@ architecture structural of calculator is
           regPort: out regType);
   end component;
 
--- Converts numerical answer and transmits in ASCII
+  -- Takes in number and converts to BCD ASCII preceded by an equal sign and
+  -- followed by a newline and carriage return and inserts into FIFO.
   component toAnsReg is
     port (clk: in std_logic;
           numPort: in signed(15 downto 0);
@@ -95,7 +106,7 @@ architecture structural of calculator is
           regPort: out regType);
   end component;
 
--- Takes in current operation and converts to ascii and transmits
+  -- Takes in current operation and converts to ASCII followed by a space.
   component toOpReg is
     port (clk: in std_logic;
           opPort: in opType;
@@ -105,7 +116,7 @@ architecture structural of calculator is
           regPort: out regType);
   end component;
 
--- Transmitter
+  -- FIFO and transmitter.
   component trans is
     port (clk: in std_logic;
           numRegPort: in regType;
@@ -120,7 +131,8 @@ architecture structural of calculator is
           TxPort: out std_logic;
           TCDonePort: out std_logic);
   end component;
-  
+
+  -- INternal signals.
   signal clk, RXDone, ansSend, ASend, BSend, opSend, resetEn, AEn, BEn, sumEn, multEn, subEn, calcEn, newNum, newNumReg, newOpReg, newAnsReg, newReg, TCDone, loadSig, addSig, subSig, multSig, resetSig: std_logic := '0';
   signal A, B, ans: signed(15 downto 0) := (others => '0');
   signal op: opType := sum;
@@ -129,7 +141,7 @@ architecture structural of calculator is
   signal num: signed(7 downto 0) := (others => '0');
 
 begin
-
+  
   clkGen: clockGenerator
     port map(clkExtPort => clkExtPort,
              clkPort => clk);
@@ -228,8 +240,4 @@ begin
              ansMaxAddrPort => ansMaxAddr,
              TxPort => TXExtPort,
              TCDonePort => TCDone);
-<<<<<<< HEAD
-      
-=======
->>>>>>> c6e60b242b9ce03a6c2e28249628b9935336c8c7
 end structural;

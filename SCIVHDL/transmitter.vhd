@@ -13,7 +13,7 @@ use IEEE.numeric_std.all;
 -- Entity definition.
 entity transmitter is
 port (clk: in std_logic;
-	  data: in std_logic_vector(7 downto 0);
+      ddata: in std_logic_vector(7 downto 0);
       newData: in std_logic;
       Tx: out std_logic;
       TxReady: out std_logic);

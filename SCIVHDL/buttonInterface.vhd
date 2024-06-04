@@ -14,8 +14,8 @@ use ieee.math_real.all;
 
 -- Entity definition.
 entity buttonInterface is
-  port(clk: in  std_logic;
-       buttonPort: in  std_logic;
+  port(clk: in std_logic;
+       buttonPort: in std_logic;
        buttonMpPort: out std_logic);
 end buttonInterface;
 
