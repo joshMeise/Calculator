@@ -1,7 +1,7 @@
 Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2021.2 (win64) Build 3367213 Tue Oct 19 02:48:09 MDT 2021
-| Date         : Tue Jun  4 16:03:35 2024
+| Date         : Tue Jun  4 16:07:18 2024
 | Host         : cadlab-04 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file calculator_control_sets_placed.rpt
 | Design       : calculator
@@ -74,48 +74,48 @@ Table of Contents
 |      Clock Signal     |              Enable Signal              |            Set/Reset Signal           | Slice Load Count | Bel Load Count | Bels / Slice |
 +-----------------------+-----------------------------------------+---------------------------------------+------------------+----------------+--------------+
 |  clkExtPort_IBUF_BUFG |                                         |                                       |                1 |              1 |         1.00 |
-|  clkGen/clkPort       | rec/convert                             | rec/datapath.num[3]_i_1_n_0           |                1 |              4 |         4.00 |
 |  clkGen/clkPort       | toAns/intData[13]_i_2__0_n_0            | toAns/intData[13]                     |                2 |              4 |         2.00 |
-|  clkGen/clkPort       | toAns/intData[13]_i_2__0_n_0            |                                       |                3 |              4 |         1.33 |
 |  clkGen/clkPort       | toNum/intData[13]_i_2_n_0               |                                       |                3 |              4 |         1.33 |
-|  clkGen/clkPort       | toNum/intData[13]_i_2_n_0               | toNum/intData[10]                     |                2 |              4 |         2.00 |
 |  clkGen/clkPort       | rec/convert                             | rec/resetReg                          |                2 |              4 |         2.00 |
 |  clkGen/clkPort       | rec/writeNumReg                         | rec/resetReg                          |                1 |              4 |         4.00 |
 |  clkGen/clkPort       | rec/shiftEn                             | rec/bitClr                            |                1 |              4 |         4.00 |
-|  clkGen/clkPort       | controller/FSM_sequential_cs[4]_i_1_n_0 |                                       |                3 |              5 |         1.67 |
+|  clkGen/clkPort       | toAns/intData[13]_i_2__0_n_0            |                                       |                3 |              4 |         1.33 |
+|  clkGen/clkPort       | rec/convert                             | rec/datapath.num[3]_i_1_n_0           |                1 |              4 |         4.00 |
+|  clkGen/clkPort       | toNum/intData[13]_i_2_n_0               | toNum/intData[10]                     |                2 |              4 |         2.00 |
 |  clkGen/clkPort       | path/E[0]                               |                                       |                2 |              5 |         2.50 |
+|  clkGen/clkPort       | controller/FSM_sequential_cs[4]_i_1_n_0 |                                       |                3 |              5 |         1.67 |
 |  clkGen/clkPort       | trans/bitCtr[4]_i_1_n_0                 | toOut/Q[0]                            |                1 |              5 |         5.00 |
-|  clkExtPort_IBUF_BUFG |                                         | clkGen/clkDividerCtr[5]_i_1_n_0       |                2 |              6 |         3.00 |
+|  clkGen/clkPort       | toNum/intReg[9][5]_i_2_n_0              | toNum/intReg[9][5]_i_1_n_0            |                1 |              6 |         6.00 |
 |  clkGen/clkPort       | toOut/FSM_onehot_cs[8]_i_1_n_0          |                                       |                2 |              6 |         3.00 |
-|  clkGen/clkPort       | toNum/intReg[7][5]_i_2_n_0              | toNum/intReg[7][5]_i_1_n_0            |                2 |              6 |         3.00 |
-|  clkGen/clkPort       | toNum/intReg[6][5]_i_2_n_0              | toNum/intReg[6][5]_i_1_n_0            |                2 |              6 |         3.00 |
-|  clkGen/clkPort       | toNum/intReg[8][5]_i_2_n_0              | toNum/intReg[8][5]_i_1_n_0            |                3 |              6 |         2.00 |
-|  clkGen/clkPort       | toNum/intReg[2][5]_i_2_n_0              | toNum/intReg[2][5]_i_1_n_0            |                2 |              6 |         3.00 |
-|  clkGen/clkPort       | toNum/intReg[4][5]_i_2_n_0              | toNum/intReg[4][5]_i_1_n_0            |                2 |              6 |         3.00 |
+|  clkExtPort_IBUF_BUFG |                                         | clkGen/clkDividerCtr[5]_i_1_n_0       |                2 |              6 |         3.00 |
 |  clkGen/clkPort       | toNum/intReg[0][5]_i_2_n_0              | toNum/intReg[0][5]_i_1_n_0            |                2 |              6 |         3.00 |
 |  clkGen/clkPort       | toNum/intReg[1][5]_i_2_n_0              | toNum/intReg[1][5]_i_1_n_0            |                3 |              6 |         2.00 |
+|  clkGen/clkPort       | toNum/intReg[2][5]_i_2_n_0              | toNum/intReg[2][5]_i_1_n_0            |                2 |              6 |         3.00 |
+|  clkGen/clkPort       | toNum/intReg[4][5]_i_2_n_0              | toNum/intReg[4][5]_i_1_n_0            |                2 |              6 |         3.00 |
 |  clkGen/clkPort       | toNum/intReg[5][5]_i_2_n_0              | toNum/intReg[5][5]_i_1_n_0            |                2 |              6 |         3.00 |
+|  clkGen/clkPort       | toNum/intReg[6][5]_i_2_n_0              | toNum/intReg[6][5]_i_1_n_0            |                2 |              6 |         3.00 |
 |  clkGen/clkPort       | toNum/intReg[3][5]_i_2_n_0              | toNum/intReg[3][5]_i_1_n_0            |                2 |              6 |         3.00 |
-|  clkGen/clkPort       | toNum/intReg[9][5]_i_2_n_0              | toNum/intReg[9][5]_i_1_n_0            |                1 |              6 |         6.00 |
-|  clkGen/clkPort       | toOut/read                              |                                       |                3 |              7 |         2.33 |
+|  clkGen/clkPort       | toNum/intReg[8][5]_i_2_n_0              | toNum/intReg[8][5]_i_1_n_0            |                3 |              6 |         2.00 |
+|  clkGen/clkPort       | toNum/intReg[7][5]_i_2_n_0              | toNum/intReg[7][5]_i_1_n_0            |                2 |              6 |         3.00 |
 |  clkGen/clkPort       | toAns/intAddr[7]_i_2__0_n_0             | toAns/intAddr0_in[5]                  |                4 |              7 |         1.75 |
-|  clkGen/clkPort       | controller/FSM_sequential_cs_reg[4]_0   | controller/FSM_sequential_cs_reg[4]_1 |                2 |              8 |         4.00 |
+|  clkGen/clkPort       | toOut/read                              |                                       |                3 |              7 |         2.33 |
 |  clkGen/clkPort       | controller/CEA2                         | controller/FSM_sequential_cs_reg[4]_2 |                2 |              8 |         4.00 |
-|  clkGen/clkPort       | toNum/FSM_onehot_cs[3]_i_1_n_0          |                                       |                2 |              8 |         4.00 |
+|  clkGen/clkPort       | controller/FSM_sequential_cs_reg[4]_0   | controller/FSM_sequential_cs_reg[4]_1 |                2 |              8 |         4.00 |
+|  clkGen/clkPort       | rec/intData[7]_i_1__2_n_0               |                                       |                2 |              8 |         4.00 |
 |  clkGen/clkPort       | rec/ns                                  |                                       |                2 |              8 |         4.00 |
 |  clkGen/clkPort       | rec/numReg[0][7]_i_1_n_0                | rec/resetReg                          |                2 |              8 |         4.00 |
-|  clkGen/clkPort       | rec/intData[7]_i_1__2_n_0               |                                       |                2 |              8 |         4.00 |
-|  clkGen/clkPort       | toOut/read                              | toOut/clr                             |                2 |              8 |         4.00 |
 |  clkGen/clkPort       | rec/numReg[10]_9                        | rec/resetReg                          |                2 |              8 |         4.00 |
-|  clkGen/clkPort       | rec/numReg[9]_8                         | rec/resetReg                          |                2 |              8 |         4.00 |
-|  clkGen/clkPort       | rec/numReg[4]_3                         | rec/resetReg                          |                2 |              8 |         4.00 |
-|  clkGen/clkPort       | rec/numReg[7]_6                         | rec/resetReg                          |                3 |              8 |         2.67 |
-|  clkGen/clkPort       | rec/numReg[3]_2                         | rec/resetReg                          |                2 |              8 |         4.00 |
-|  clkGen/clkPort       | rec/numReg[5]_4                         | rec/resetReg                          |                2 |              8 |         4.00 |
-|  clkGen/clkPort       | rec/number[7]_i_1_n_0                   |                                       |                4 |              8 |         2.00 |
-|  clkGen/clkPort       | toNum/intAddr[7]_i_2_n_0                | toNum/intAddr                         |                5 |              8 |         1.60 |
 |  clkGen/clkPort       | rec/numReg[1]_0                         | rec/resetReg                          |                2 |              8 |         4.00 |
 |  clkGen/clkPort       | rec/numReg[2]_1                         | rec/resetReg                          |                4 |              8 |         2.00 |
+|  clkGen/clkPort       | toNum/FSM_onehot_cs[3]_i_1_n_0          |                                       |                2 |              8 |         4.00 |
+|  clkGen/clkPort       | toNum/intAddr[7]_i_2_n_0                | toNum/intAddr                         |                5 |              8 |         1.60 |
+|  clkGen/clkPort       | rec/numReg[9]_8                         | rec/resetReg                          |                2 |              8 |         4.00 |
+|  clkGen/clkPort       | rec/number[7]_i_1_n_0                   |                                       |                4 |              8 |         2.00 |
+|  clkGen/clkPort       | rec/numReg[5]_4                         | rec/resetReg                          |                2 |              8 |         4.00 |
+|  clkGen/clkPort       | rec/numReg[7]_6                         | rec/resetReg                          |                3 |              8 |         2.67 |
+|  clkGen/clkPort       | rec/numReg[3]_2                         | rec/resetReg                          |                2 |              8 |         4.00 |
+|  clkGen/clkPort       | rec/numReg[4]_3                         | rec/resetReg                          |                2 |              8 |         4.00 |
+|  clkGen/clkPort       | toOut/read                              | toOut/clr                             |                2 |              8 |         4.00 |
 |  clkGen/clkPort       | rec/numReg[8]_7                         | rec/resetReg                          |                1 |              8 |         8.00 |
 |  clkGen/clkPort       | rec/numReg[6]_5                         | rec/resetReg                          |                2 |              8 |         4.00 |
 |  clkGen/clkPort       | toOut/E[0]                              |                                       |                2 |              9 |         4.50 |
