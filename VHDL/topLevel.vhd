@@ -1,40 +1,57 @@
+--
+--topLevel.vhd --- top level for calculator
+--
+--Author: Joshua Meise and Brandon Zhao
+--Created: 05-29-2024
+--
+
+-- Library inclusions.
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-
 library work;
 use work.myPackage.all;
 
+-- Entity definition.
 entity calculator is
   port (clkExtPort: in std_logic;
         sumExtPort: in std_logic;
         multExtPort: in std_logic;
         subExtPort: in std_logic;
-        loadExtPort: in std_logic;
-        resetExtPort: in std_logic;
-        inputExtPort: in std_logic_vector(15 downto 0);
+        RxExtPort: in std_logic;
         TxExtPort: out std_logic);
 end calculator;
         
+-- Architecture definition.
 architecture structural of calculator is
+  -- Clock divider.
   component clockGenerator is
     port (clkExtPort: in std_logic;
           clkPort: out std_logic);
   end component;
 
+  -- Button interfacing (monopulser).
   component buttonInterface is
     port(clk: in  std_logic;
          buttonPort: in  std_logic;
          buttonMpPort: out std_logic);
   end component;
-  
+
+  -- Receiver.
+  component receiver is
+    port (clk: in std_logic;
+          RxPort: in std_logic;
+          numPort: out signed(7 downto 0);
+          RxDonePort: out std_logic);
+  end component;
+
+  -- Controller.
   component fsm is
     port (clk: in std_logic;
           sumPort: in std_logic;
           multPort: in std_logic;
           subPort: in std_logic;
-          loadPort: in std_logic;
-          resetPort: in std_logic;
+          RxDonePort: in std_logic;
           TCDonePort: in std_logic;
           AEnPort: out std_logic;
           BEnPort: out std_logic;
@@ -49,6 +66,7 @@ architecture structural of calculator is
           ansSendPort: out std_logic);
   end component;
 
+  -- Datapath.
   component datapath is
     port (clk: in std_logic;
           AEnPort: in std_logic;
@@ -58,13 +76,14 @@ architecture structural of calculator is
           multEnPort: in std_logic;
           resetEnPort: in std_logic;
           calcEnPort: in std_logic;
-          inputPort: in std_logic_vector(15 downto 0);
+          numPort: signed(7 downto 0);
           ansPort: out signed(15 downto 0);
           APort: out signed(15 downto 0);
           BPort: out signed(15 downto 0);
           opPort: out opType);
   end component;
   
+  -- Takes in number and converts to BCD ASCII and inserts into FIFO.
   component toNumReg is
     port (clk: in std_logic;
           ANumPort: in signed(15 downto 0);
@@ -76,6 +95,8 @@ architecture structural of calculator is
           regPort: out regType);
   end component;
 
+  -- Takes in number and converts to BCD ASCII preceded by an equal sign and
+  -- followed by a newline and carriage return and inserts into FIFO.
   component toAnsReg is
     port (clk: in std_logic;
           numPort: in signed(15 downto 0);
@@ -85,6 +106,7 @@ architecture structural of calculator is
           regPort: out regType);
   end component;
 
+  -- Takes in current operation and converts to ASCII followed by a space.
   component toOpReg is
     port (clk: in std_logic;
           opPort: in opType;
@@ -94,42 +116,47 @@ architecture structural of calculator is
           regPort: out regType);
   end component;
 
-  component trans is
+  -- FIFO
+  component toOutput is
     port (clk: in std_logic;
-          numRegPort: in regType;
-          newNumRegPort: in std_logic;
-          opRegPort: in regType;
-          newOpRegPort: in std_logic;
-          ansRegPort: regType;
-          newAnsRegPort: in std_logic;
-          numMaxAddrPort: in unsigned(7 downto 0);
-          opMaxAddrPort: in unsigned(7 downto 0);
-          ansMaxAddrPort: in unsigned(7 downto 0);
-          TxPort: out std_logic;
-          TCDonePort: out std_logic);
-  end component;
-  
-  signal clk, ansSend, ASend, BSend, opSend, AEn, BEn, sumEn, multEn, subEn, resetEn, calcEn, newNum, newNumReg, newOpReg, newAnsReg, newReg, TCDone, loadSig, addSig, subSig, multSig, resetSig: std_logic := '0';
-  signal A, B, ans, num: signed(15 downto 0) := (others => '0');
+          TxReady: in std_logic;
+          numReg: in regType;
+          newNumReg: in std_logic;
+          opReg: in regType;
+          newOpreg: in std_logic;
+          ansReg: in regType;
+          newAnsReg: in std_logic;
+          numMaxAddr: in unsigned(7 downto 0);
+          opMaxAddr: in unsigned(7 downto 0);
+          ansMaxAddr: in unsigned(7 downto 0);  
+          data: out std_logic_vector(7 downto 0);
+          newData: out std_logic;
+          TCdone: out std_logic);
+	end component; 
+
+  -- Transmitter.
+  component transmitter is
+    port (clk: in std_logic;
+          data: in std_logic_vector(7 downto 0);
+      	  newData: in std_logic;
+      	  Tx: out std_logic;
+      	  TxReady: out std_logic);
+	end component;
+
+  -- Internal signals.
+  signal clk, RXDone, ansSend, ASend, BSend, opSend, resetEn, AEn, BEn, sumEn, multEn, subEn, calcEn, newNum, newNumReg, newOpReg, newAnsReg, newReg, TCDone, loadSig, addSig, subSig, multSig, resetSig, TxReady, newData: std_logic := '0';
+  signal A, B, ans: signed(15 downto 0) := (others => '0');
   signal op: opType := sum;
   signal numMaxAddr, opMaxAddr, ansMaxAddr, maxAddr: unsigned(7 downto 0) := (others => '0');
   signal numReg, opReg, ansReg, reg: regType := (others => (others => '0'));
+  signal num: signed(7 downto 0) := (others => '0');
+  signal data: std_logic_vector(7 downto 0) := (others => '0');
 
 begin
-
+  
   clkGen: clockGenerator
     port map(clkExtPort => clkExtPort,
              clkPort => clk);
-
-  loadBtn: buttonInterface
-    port map (clk => clk,
-              buttonPort => loadExtPort,
-              buttonMpPort => loadSig);
-
-  resetBtn: buttonInterface
-    port map (clk => clk,
-              buttonPort => resetExtPort,
-              buttonMpPort => resetSig);
 
   addBtn: buttonInterface
     port map (clk => clk,
@@ -145,14 +172,19 @@ begin
     port map (clk => clk,
               buttonPort => multExtPort,
               buttonMpPort => multSig);
+
+  rec: receiver
+    port map (clk => clk,
+              RxPort => RxExtPort,
+              numPort => num,
+              RxDonePort => RxDone);
   
   controller: fsm
     port map (clk => clk,
               sumPort => addSig,              
               multPort => multSig,
               subPort => subSig,
-              loadPort => loadSig,
-              resetPort => resetSig,
+              RxDonePort => RxDone,
               TCDonePort => TCDone,
               AEnPort => AEn,
               BEnPort => BEn,
@@ -175,7 +207,7 @@ begin
               multEnPort => multEn,
               resetEnPort => resetEn,
               calcEnPort => calcEn,
-              inputPort => inputExtPort,
+              numPort => num,
               ansPort => ans,
               APort => A,
               BPort => B,
@@ -207,53 +239,27 @@ begin
               newRegPort => newAnsReg,
               regport => ansReg);
 
-  transmitter: trans
-    port map(clk => clk,
-             numRegPort => numReg,
-             newNumRegPort => newNumReg,
-             opRegPort => opReg,
-             newOpRegPort => newOpReg,
-             ansRegPort => ansReg,
-             newAnsRegPort => newAnsReg,
-             numMaxAddrPort => numMaxAddr,
-             opMaxAddrPort => opMaxAddr,
-             ansMaxAddrPort => ansMaxAddr,
-             TxPort => TXExtPort,
-             TCDonePort => TCDone);
+  toOut: toOutput
+    port map (clk => clk,
+              TxReady => TxReady,
+              numReg => numReg,
+              newNumReg => newNumReg,
+              opReg => opReg,
+              newOpReg => newOpReg,
+              ansReg => ansReg,
+              newAnsReg => newAnsReg,
+              numMaxAddr => numMaxAddr,
+              opMaxAddr => opMaxAddr,
+              ansMaxAddr => ansMaxAddr,
+              data => data,
+              newData => newData,
+              TCDone => TCDone);
 
-  newNum <= (ASend or BSend);
---  newReg <= (newNumReg or newOpReg or newAnsReg);
+  trans: transmitter
+    port map (clk => clk,
+              data => data,
+              newData => newData,
+              Tx => TxExtPort,
+              TxReady => TxReady);
   
---  updateRegAndAddr: process(clk, newOpReg, newNumReg, newAnsReg, opMaxAddr, numMaxAddr, ansMaxAddr, opReg, numReg, ansReg)
---  begin
-  --if rising_edge(clk) then
---    if newOpReg = '1' then
---      maxAddr <= opMaxAddr;
---      reg <= opReg;
---    elsif newNumReg = '1' then
---      maxAddr <= numMaxAddr;
---      reg <= numReg;
---    elsif newAnsReg  = '1' then
---      maxAddr <= ansMaxAddr;
---      reg <= ansReg;
---    else
---      maxAddr <= (others => '0');
---      reg <= (others => (others => '0'));
---    end if;
-   -- end if;
---  end process;  
-
-  --updateNum: process(clk, ASend, BSend, A, B)
- -- begin
-  --if rising_edge(clk) then
-  --  if ASend = '1' then
-   --   num <= A;
-  --  elsif BSend = '1' then
-   --   num <= B;
-   -- else
-    --  num <= (others => '0');
-   -- end if;
-   -- end if;
-  --end process;  
-      
 end structural;

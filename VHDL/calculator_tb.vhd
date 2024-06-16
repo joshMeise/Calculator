@@ -14,14 +14,11 @@ architecture testbench of calculator_tb is
           sumExtPort: in std_logic;
           multExtPort: in std_logic;
           subExtPort: in std_logic;
-          loadExtPort: in std_logic;
-          resetExtPort: in std_logic;
-          inputExtPort: in std_logic_vector(15 downto 0);
+          RxExtPort: in std_logic;
           TxExtPort: out std_logic);
   end component;
 
-  signal clk, sumExtPort, multExtPort, subExtPort, loadExtPort, resetExtPort, TXExtPort: std_logic := '0';
-  signal inputExtPort: std_logic_vector(15 downto 0) := (others => '0');
+  signal clk, sumExtPort, multExtPort, subExtPort, TxExtPort, Rx: std_logic := '0';
  
 begin
   uut: calculator
@@ -29,9 +26,7 @@ begin
               sumExtPort => sumExtPort,
               multExtPort => multExtPort,
               subExtPort => subExtPort,
-              loadExtPort => loadExtPort,
-              resetExtPort => resetExtPort,
-              inputExtPort => inputExtPort,
+              RxExtPort => Rx,
               TXExtPort => TXExtPort);
 
   clock: process
@@ -43,21 +38,153 @@ begin
   end process;
 
   stim: process
+  -- sends over 10001100 into receiver
   begin
     wait for 4000ns;
-    inputExtPort <= "1111111111111101";
-    loadExtPort <= '1';
+        Rx <= '1';
+    wait for 20ns;
+    -- 2
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    
+    Rx <= '1';
+    wait for 300us;
+    
+    -- 2 sends over 01001100
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    
+    Rx <= '1';
+    wait for 300us;
+    
+    -- 7 sends over 11101100
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    
+    Rx <= '1';
+    wait for 300us;
+    
+    -- space, sends over 00000100
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    
+    Rx <= '1';
+    wait for 7000us;
+
+     -- ADD
+    sumExtPort <= '1';
     wait for 2000ns;
-    loadExtPort <= '0';
-    wait for 4500000ns;
-    subExtPort <= '1';
-    wait for 2000ns;
-    subExtPort <= '0';
-    wait for 4500000ns;
-    inputExtPort <= "0000000000001000";
-    loadExtPort <= '1';
-    wait for 2000ns;
-    loadExtPort <= '0';
+    sumExtPort <= '0';
+    wait for 5000us;
+    -- 2 send over 01001100 then 00000100
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    
+    Rx <= '1';
+    wait for 300us;
+    
+    -- space
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '1';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    Rx <= '0';
+    wait for 104us;
+    
+    Rx <= '1';
+
     wait;
   end process;   
 
