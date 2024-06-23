@@ -78,9 +78,9 @@ The calculator communicates via a serial connection with the following parameter
 
 The constraints file is configured for the BASYS 3 board and includes pin assignments for the system clock, buttons, and serial communication.
 
-## Author
+## Authors
 
-Joshua Meise
+Joshua Meise and Brandon Zhao
 
 This VHDL Calculator project was developed as part of Dartmouth College's ENGS31 class, Digital Electronics. The project demonstrates the use of VHDL for implementing a basic calculator with serial communication on an FPGA.
 
