@@ -156,7 +156,7 @@ architecture structural of calculator is
 begin
   
   clkGen: clockGenerator
-    generic map (clockDividerRatio => 100);
+    generic map (clockDividerRatio => 100)
     port map (clkExtPort => clkExtPort,
              clkPort => clk);
 

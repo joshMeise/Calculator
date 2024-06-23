@@ -28,15 +28,15 @@ set_property PACKAGE_PIN U17 [get_ports subExtPort]
 ##====================================================================
 set_property PACKAGE_PIN B18 [get_ports RxExtPort]						
 	set_property IOSTANDARD LVCMOS33 [get_ports RxExtPort]
-#set_property PACKAGE_PIN A18 [get_ports TxExtPort]						
-#	set_property IOSTANDARD LVCMOS33 [get_ports TxExtPort]
+set_property PACKAGE_PIN A18 [get_ports TxExtPort]						
+	set_property IOSTANDARD LVCMOS33 [get_ports TxExtPort]
 
 ##====================================================================
 ## Pmod Header JC
 ##====================================================================
 ##Sch name = JC1
-set_property PACKAGE_PIN K17 [get_ports {TxExtPort}]					
-	set_property IOSTANDARD LVCMOS33 [get_ports {TxExtPort}]
+#set_property PACKAGE_PIN K17 [get_ports {TxExtPort}]					
+#	set_property IOSTANDARD LVCMOS33 [get_ports {TxExtPort}]
 	
 ##====================================================================
 ## Implementation Assist
