@@ -15,6 +15,7 @@ use UNISIM.VComponents.all;
 
 -- entity definition.
 entity clockGenerator is
+  generic (clockDividerRatio: integer);
   port (clkExtPort: in std_logic;
         clkPort: out std_logic);
 end clockGenerator;
@@ -22,7 +23,7 @@ end clockGenerator;
 -- Architecture definition.
 architecture behavioral of clockGenerator is
   -- Constants and internal signals.
-  constant clkDividerTC: integer := 50;
+  constant clkDividerTC: integer := clockDividerRatio/2;
   constant countLen: integer := integer(ceil(log2(real(clkDividerTC))));
   signal clkDividerCtr: unsigned(countLen-1 downto 0) := (others => '0');
   signal clkTog: std_logic := '0';

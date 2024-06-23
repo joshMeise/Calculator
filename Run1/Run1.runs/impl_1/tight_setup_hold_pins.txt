@@ -1,8 +1,0 @@
-+==============+===============+========================+
-| Launch Clock | Capture Clock | Pin                    |
-+==============+===============+========================+
-| sys_clk_pin  | sys_clk_pin   | toNum/dig_reg[1]/D     |
-| sys_clk_pin  | sys_clk_pin   | toNum/intData_reg[7]/D |
-| sys_clk_pin  | sys_clk_pin   | toNum/dig_reg[3]/D     |
-| sys_clk_pin  | sys_clk_pin   | toNum/intData_reg[9]/D |
-+--------------+---------------+------------------------+

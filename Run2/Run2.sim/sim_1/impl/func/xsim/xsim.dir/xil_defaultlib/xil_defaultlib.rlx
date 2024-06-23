@@ -1,7 +1,0 @@
-0.7
-2020.2
-Oct 19 2021
-03:16:22
-O:/ENGS31/Proj/Run2/Run2.sim/sim_1/impl/func/xsim/calculator_tb_func_impl.v,1716899080,verilog,,,,buttonInterface;buttonInterface_0;buttonInterface_1;buttonInterface_2;buttonInterface_3;calculator;clockGenerator;datapath;fsm;glbl;toAnsReg;toNumReg;toOpReg;toOutput;trans;transmitter,,,,,,,,
-O:/ENGS31/Proj/VHDL/calculator_tb.vhd,1716746702,vhdl,,,,calculator_tb,,,,,,,,
-O:/ENGS31/Proj/VHDL/myPackage.vhd,1716656121,vhdl,O:/ENGS31/Proj/VHDL/calculator_tb.vhd,,,mypackage,,,,,,,,

@@ -26,6 +26,7 @@ end calculator;
 architecture structural of calculator is
   -- Clock divider.
   component clockGenerator is
+    generic (clockDividerRatio: integer);
     port (clkExtPort: in std_logic;
           clkPort: out std_logic);
   end component;
@@ -84,7 +85,7 @@ architecture structural of calculator is
   end component;
   
   -- Takes in number and converts to BCD ASCII and inserts into FIFO.
-  component toNumReg is
+  component numToFIFO is
     port (clk: in std_logic;
           ANumPort: in signed(15 downto 0);
           newANumPort: in std_logic;
@@ -97,7 +98,7 @@ architecture structural of calculator is
 
   -- Takes in number and converts to BCD ASCII preceded by an equal sign and
   -- followed by a newline and carriage return and inserts into FIFO.
-  component toAnsReg is
+  component ansToFIFO is
     port (clk: in std_logic;
           numPort: in signed(15 downto 0);
           newNumPort: in std_logic;
@@ -107,7 +108,7 @@ architecture structural of calculator is
   end component;
 
   -- Takes in current operation and converts to ASCII followed by a space.
-  component toOpReg is
+  component opToFIFO is
     port (clk: in std_logic;
           opPort: in opType;
           newOpPort: in std_logic;
@@ -117,7 +118,7 @@ architecture structural of calculator is
   end component;
 
   -- FIFO
-  component toOutput is
+  component FIFO is
     port (clk: in std_logic;
           TxReady: in std_logic;
           numReg: in regType;
@@ -155,7 +156,8 @@ architecture structural of calculator is
 begin
   
   clkGen: clockGenerator
-    port map(clkExtPort => clkExtPort,
+    generic map (clockDividerRatio => 100);
+    port map (clkExtPort => clkExtPort,
              clkPort => clk);
 
   addBtn: buttonInterface
@@ -213,7 +215,7 @@ begin
               BPort => B,
               opPort => op);
 
-  toNum: toNumReg
+  toNum: numToFIFO
     port map (clk => clk,
               ANumPort => A,
               newANumPort => ASend,
@@ -223,7 +225,7 @@ begin
               newRegPort => newNumReg,
               regPort => numReg);
 
-  toOp: toOpReg
+  toOp: opToFIFO
     port map (clk => clk,
               opPort => op,
               newOpPort => opSend,
@@ -231,7 +233,7 @@ begin
               newRegPort => newOpReg,
               regport => opReg);
   
-  toAns: toAnsReg
+  toAns: ansToFIFO
     port map (clk => clk,
               numPort => ans,
               newNumPort => ansSend,
@@ -239,7 +241,7 @@ begin
               newRegPort => newAnsReg,
               regport => ansReg);
 
-  toOut: toOutput
+  toOut: FIFO
     port map (clk => clk,
               TxReady => TxReady,
               numReg => numReg,
