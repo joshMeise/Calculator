@@ -17,6 +17,7 @@ end receiver_tb;
 
 -- Architecture definition.
 architecture testbench of receiver_tb is
+  generic (baudCounter: integer);
 	component receiver is
     port (clk: in std_logic;
           RxPort: in std_logic;
@@ -27,9 +28,11 @@ architecture testbench of receiver_tb is
   signal clk: std_logic := '0';
   signal Rx, RxDonePort: std_logic := '0';
   signal numPort: signed(7 downto 0) := (others => '0');
+  constant baudCounterConst: integer := 104;
   
 begin
 	uut: receiver
+    generic map(baudCounter => baudCounterConst)
     port map (clk => clk,
               RxPort => Rx,
               numPort => numPort,

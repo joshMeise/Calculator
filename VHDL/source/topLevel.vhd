@@ -40,6 +40,7 @@ architecture structural of calculator is
 
   -- Receiver.
   component receiver is
+    generic (baudCounter: integer);
     port (clk: in std_logic;
           RxPort: in std_logic;
           numPort: out signed(7 downto 0);
@@ -137,6 +138,7 @@ architecture structural of calculator is
 
   -- Transmitter.
   component transmitter is
+    generic (baudCounter: integer);
     port (clk: in std_logic;
           data: in std_logic_vector(7 downto 0);
       	  newData: in std_logic;
@@ -153,10 +155,13 @@ architecture structural of calculator is
   signal num: signed(7 downto 0) := (others => '0');
   signal data: std_logic_vector(7 downto 0) := (others => '0');
 
+  -- Constants
+  constant clockDividerRatioConst: integer := 100;
+  constant baudCounterConstant: integer := 104;
 begin
   
   clkGen: clockGenerator
-    generic map (clockDividerRatio => 100)
+    generic map (clockDividerRatio => clockDividerRatioConstant)
     port map (clkExtPort => clkExtPort,
              clkPort => clk);
 
@@ -176,6 +181,7 @@ begin
               buttonMpPort => multSig);
 
   rec: receiver
+    generic map (baudCounter => baudCounterConstant)
     port map (clk => clk,
               RxPort => RxExtPort,
               numPort => num,
@@ -258,6 +264,7 @@ begin
               TCDone => TCDone);
 
   trans: transmitter
+    generic map (baudCounter => baudCounterConstant)
     port map (clk => clk,
               data => data,
               newData => newData,

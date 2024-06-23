@@ -11,6 +11,7 @@ use IEEE.numeric_std.all;
 
 -- Entity definition.
 entity receiver is
+  generic (baudCounter: integer);
   port (clk: in std_logic;
         RxPort: in std_logic;
         numPort: out signed(7 downto 0);
@@ -241,7 +242,7 @@ begin
     -- Indicates that a baud period has passed for a baud rate of 9600 baud
     -- with a clock frequency of 1MHz.
     TCbaud <= '0';
-    if baudCtr = 104 then
+    if to_integer(baudCtr) = baudCounter then
       TCbaud <= '1';
     end if;
 

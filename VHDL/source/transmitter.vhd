@@ -11,6 +11,7 @@ use IEEE.numeric_std.all;
 
 -- Entity definition.
 entity transmitter is
+  generic (baudCounter: integer);
   port (clk: in std_logic;
         data: in std_logic_vector(7 downto 0);
         newData: in std_logic;
@@ -64,7 +65,7 @@ begin
     -- Send TC baud high when we have reached 104 clock cycles, corresponding
     -- to 9600 baud.
     tcBaud <= '0';
-    if baudCtr = 104 then
+    if to_integer(baudCtr) = baudCounter then
       tcBaud <= '1';
     end if;
 

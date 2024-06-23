@@ -15,6 +15,7 @@ end transmitter_tb;
 
 architecture testbench of transmitter_tb is
   component transmitter is
+    generic (baudCounter: integer);
     port (clk: in std_logic;
           data: in std_logic_vector(7 downto 0);
           newData: in std_logic;
@@ -24,9 +25,11 @@ architecture testbench of transmitter_tb is
 
   signal clk, newData, TxReady, Tx: std_logic := '0';
   signal data: std_logic_vector(7 downto 0) := (others => '0');
-
+  constant baudCounterConst: integer := 104;
+  
 begin
   uut: transmitter
+    generic map (baudCounter => baudCounterConst)
     port map (clk => clk,
               data => data,
               newData => newData,

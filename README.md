@@ -25,20 +25,22 @@ The calculator accepts input via a serial connection with the following format:
 1. **First Number**: A signed integer between -128 and 127.
 2. **Space**: A space character (' ').
 3. **Operation**: A button push indicating the operation:
-   - **Add**: Button 1
-   - **Subtract**: Button 2
-   - **Multiply**: Button 3
+   - **Add**: Top Button
+   - **Subtract**: Middle Button
+   - **Multiply**: Bottom Button
 4. **Second Number**: A signed integer between -128 and 127.
 5. **Space**: A space character (' ').
 
 ### Example Input
-
+1. `23 [top button] 45`
+2. `-12 [bottom button] -62`
+3. `10 [middle button] 5`
 
 This input performs the following calculations:
 
-1. `23 + 45`
-2. `-12 - 50`
-3. `10 * 5`
+1. `23 + 45 = 68`
+2. `-12 - 50 = -62`
+3. `10 x 5 = 50`
 
 ### Serial Connection
 
@@ -51,21 +53,26 @@ The calculator communicates via a serial connection with the following parameter
 
 ### Configuration
 
-- **Clock Division**: The system clock is divided from 100MHz to 1MHz. This can be adjusted by changing the `generic` value inside `topLevel.vhd`.
-- **Baud Rate**: The baud rate for the serial connection is set to 9600. This can be adjusted by changing the `generic` value inside `topLevel.vhd`.
+- **Clock Division**: The system clock is divided from 100MHz to 1MHz. This can be adjusted by changing the `clockDividerRatioConstant` value inside `topLevel.vhd`.
+- **Baud Rate**: The baud rate for the serial connection is set to 9600. This can be adjusted by changing the `baudCounterConstant` value inside `topLevel.vhd`.
 
 ## VHDL Files
 
 ### Source Files
 
 - **topLevel.vhd**: The top-level module for the calculator.
-- **calculator.vhd**: Implements the arithmetic operations.
-- **uart.vhd**: Manages serial communication.
-
-### Testbenches
-
-- **test_calculator.vhd**: Testbench for verifying the calculator functionality.
-- **test_uart.vhd**: Testbench for verifying the UART communication.
+- **buttonInterface.vhd**: Button monopulser.
+- **clockGenerator.vhd**: Clock divider.
+- **receiver.vhd**: SCI receiver.
+- **fsm.vhd**: Controller for the calculator.
+- **datapath.vhd**: Datapath for the calculator.
+- **opToFIFO.vhd**: Converts an operation (+, - or x) to the ASCII equivalent followed by a space.
+- **numToFIFO.vhd**: Converts a number to the ASCII BCD equivalent followed by a space.
+- **ansToFIFO.vhd**: Converts a number to the ASCII BCD equivalent preceded by an equal sign and space, and followed by a carriage return and newline character.
+- **FIFO.vhd**: Holds the ASCII equivalents of the symbols to be transmitted in a queue for transmission to the transmitter.
+- **transmitter.vhd**: SCI transmitter.
+- **myPackage.vhd**: Custom package containing definition of register file and operation types.
+- **constraints.xcd**: Constrains file.
 
 ## Constraints
 
@@ -75,5 +82,5 @@ The constraints file is configured for the BASYS 3 board and includes pin assign
 
 Joshua Meise
 
-This VHDL Calculator project was developed as part of Dartmouth College's CS50 class, Software Design and Implementation. The project demonstrates the use of VHDL for implementing a basic calculator with serial communication on an FPGA.
+This VHDL Calculator project was developed as part of Dartmouth College's ENGS31 class, Digital Electronics. The project demonstrates the use of VHDL for implementing a basic calculator with serial communication on an FPGA.
 
