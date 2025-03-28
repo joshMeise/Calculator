@@ -1,6 +1,6 @@
 # VHDL Calculator
 
-This project is a simple calculator implemented in VHDL for the BASYS 3 board. It supports basic arithmetic operations: addition, subtraction, and multiplication. The calculator takes input through a serial connection and processes it accordingly.
+Simple Calculator in VHDL for BASYS 3 Board: This project implements a basic calculator supporting addition, subtraction, and multiplication, with input and output via serial connection.
 
 ## Project Structure
 
@@ -14,9 +14,9 @@ This project is a simple calculator implemented in VHDL for the BASYS 3 board. I
 
 To run the VHDL Calculator on the BASYS 3 board, follow these steps:
 
-1. **Compile the VHDL Code**: Use your preferred VHDL simulation and synthesis tool (such as Xilinx Vivado) to compile the VHDL files and generate the bitstream.
+1. **Compile the VHDL Code**: Use a VHDL simulation and synthesis tool (such as Xilinx Vivado) to compile the VHDL files and generate the bitstream.
 2. **Program the BASYS 3 Board**: Load the generated bitstream onto the BASYS 3 board.
-3. **Connect Serial Interface**: Set up a serial connection to the BASYS 3 board using a terminal program (such as PuTTY or Tera Term).
+3. **Connect Serial Interface**: Set up a serial connection to the BASYS 3 board using a terminal program (such as PuTTY).
 
 ### Serial Input Format
 
@@ -82,5 +82,5 @@ The constraints file is configured for the BASYS 3 board and includes pin assign
 
 Joshua Meise and Brandon Zhao
 
-This VHDL Calculator project was developed as part of Dartmouth College's ENGS31 class, Digital Electronics. The project demonstrates the use of VHDL for implementing a basic calculator with serial communication on an FPGA.
+This VHDL Calculator project was developed as part of Dartmouth College's COSC 56 class, Digital Electronics. The project demonstrates the use of VHDL for implementing a basic calculator with serial communication on an FPGA.
 
